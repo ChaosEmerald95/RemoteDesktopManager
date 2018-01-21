@@ -1,0 +1,8 @@
+*.dll
+bin
+obj
+*.suo
+AppPackages
+BundleArtifacts
+packages
+*.userprefs
