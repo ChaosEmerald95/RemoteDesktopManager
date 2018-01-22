@@ -34,8 +34,11 @@ namespace RemoteDesktopManager
         /// </summary>
         private void direktVerbindenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Zu Testzwecken wird eine feste Verbindung aufgebaut
-            //OpenRdpConnection("rs002155.fastrootserver.de", "ChaosEmerald95", "ce95srvrootse12", "rs002155.fastrootserver.de");
+            //Das Fenster für Direktverbindungen öffnen
+            frmenterconnectiondata frm = new frmenterconnectiondata();
+            frm.ShowDialog();
+            if (frm.RemoteDesktopData != null) //Wenn es nicht null ist, dann soll die Verbindung geöffnet werden
+                OpenRdpConnection(frm.RemoteDesktopData);
         }
 
         /// <summary>
