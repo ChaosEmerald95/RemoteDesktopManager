@@ -58,5 +58,25 @@ namespace RemoteDesktopManager
             //Schliessen
             Close();
         }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn auf ENTER gedrückt wird, dann soll das Button-Event ausgelöst werden
+        /// </summary>
+        private void txtcomputer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnconnect_Click(btnconnect, null);
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn auf ENTER gedrückt wird, dann soll das Button-Event ausgelöst werden
+        /// </summary>
+        private void txtusername_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnconnect_Click(btnconnect, null);
+        }
     }
 }

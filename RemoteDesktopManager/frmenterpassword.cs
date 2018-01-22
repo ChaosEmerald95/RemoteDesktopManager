@@ -54,5 +54,15 @@ namespace RemoteDesktopManager
         {
             get => m_pw;
         }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn auf ENTER gedrückt wird, dann soll das Button-Event ausgelöst werden
+        /// </summary>
+        private void txtpassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                btnconnect_Click(btnconnect, null);
+        }
     }
 }

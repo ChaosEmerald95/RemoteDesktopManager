@@ -65,6 +65,7 @@
             this.txtcomputer.Name = "txtcomputer";
             this.txtcomputer.Size = new System.Drawing.Size(217, 20);
             this.txtcomputer.TabIndex = 1;
+            this.txtcomputer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtcomputer_KeyDown);
             // 
             // lbusername
             // 
@@ -99,6 +100,7 @@
             this.txtusername.Name = "txtusername";
             this.txtusername.Size = new System.Drawing.Size(217, 20);
             this.txtusername.TabIndex = 2;
+            this.txtusername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtusername_KeyDown);
             // 
             // frmenterconnectiondata
             // 

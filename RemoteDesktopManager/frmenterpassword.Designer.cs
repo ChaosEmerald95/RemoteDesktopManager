@@ -70,6 +70,7 @@
             this.txtpassword.PasswordChar = '•';
             this.txtpassword.Size = new System.Drawing.Size(217, 20);
             this.txtpassword.TabIndex = 2;
+            this.txtpassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtpassword_KeyDown);
             // 
             // btnconnect
             // 
