@@ -24,7 +24,8 @@ namespace RemoteDesktopManager
         private void OpenRdpConnection(RemoteDesktopData rdpData)
         {
             RemoteDesktopTabPage rdp = new RemoteDesktopTabPage(rdpData);
-            tabc.TabPages.Add(rdp); //TabPage hinzufügen
+            if (!rdp.IsDenied)
+                tabc.TabPages.Add(rdp); //TabPage hinzufügen
         }
 
         /// <summary>

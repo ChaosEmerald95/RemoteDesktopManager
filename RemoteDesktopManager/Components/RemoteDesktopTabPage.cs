@@ -12,6 +12,8 @@ namespace RemoteDesktopManager.Components
     /// </summary>
     public class RemoteDesktopTabPage : TabPage
     {
+        private bool m_dispose = false; //Wenn auf true, dann soll keine TabPage hinzugefügt werden
+
         /// <summary>
         /// Erstellt eine neue Instanz von RemoteDesktopTabPage
         /// </summary>
@@ -47,6 +49,7 @@ namespace RemoteDesktopManager.Components
                 else
                 {
                     MessageBox.Show("Es wurde kein Passwort eingegeben! Der Vorgang wird abgebrochen", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    m_dispose = true;
                     return;
                 }
             }
@@ -62,6 +65,14 @@ namespace RemoteDesktopManager.Components
 
             //jetzt Element anzeigen
             rdpView.Show();
+        }
+
+        /// <summary>
+        /// Wenn auf true, dann soll die TabPage erst nicht hinzugefügt werden
+        /// </summary>
+        internal bool IsDenied
+        {
+            get => m_dispose;
         }
     }
 }
