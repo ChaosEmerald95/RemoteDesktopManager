@@ -65,6 +65,15 @@ namespace RemoteDesktopManager.Components
 
             //jetzt Element anzeigen
             rdpView.Show();
+
+            //ContextMenuStrip erstellen und konfigurieren
+            ContextMenuStrip strip = new ContextMenuStrip();
+            ToolStripItem tsitem1 = new ToolStripMenuItem("Schliessen");
+            tsitem1.Click += ContextMenuClose_Clicked;
+            strip.Items.Add(tsitem1);
+
+            //ContextMenuStrip der TabPage hinzufügen
+            ContextMenuStrip = strip;
         }
 
         /// <summary>
@@ -73,6 +82,17 @@ namespace RemoteDesktopManager.Components
         internal bool IsDenied
         {
             get => m_dispose;
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Dem Fenster den Befehl erteilen, die Verbindung zu schliessen
+        /// </summary>
+        private void ContextMenuClose_Clicked(object sender, EventArgs e)
+        {
+            //Verbindung schliessen
+            RemoteDesktopTabPageView r = (RemoteDesktopTabPageView)Controls[0];
+            r.Disconnect();
         }
     }
 }

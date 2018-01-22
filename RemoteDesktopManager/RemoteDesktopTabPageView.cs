@@ -55,6 +55,14 @@ namespace RemoteDesktopManager
         }
 
         /// <summary>
+        /// Gibt dem RemoteDesktop-Steuerelement den Befehl, die Verbindung zu schliessen
+        /// </summary>
+        public void Disconnect()
+        {
+            rdp.Disconnect();
+        }
+
+        /// <summary>
         /// Event-Methode:
         /// Wenn die Verbindung getrennt wurde
         /// </summary>

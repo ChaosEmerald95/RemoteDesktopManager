@@ -60,5 +60,40 @@ namespace RemoteDesktopManager
             System.Diagnostics.Debug.Print("Event frmmain::RemoteDesktopItemClicked executed");
             OpenRdpConnection(data);
         }
+
+        /// <summary>
+        /// Quelle: https://stackoverflow.com/a/40806408
+        /// </summary>
+        private void tabc_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                for (int i = 0; i < tabc.TabCount; i++)
+                {
+                    Rectangle r = tabc.GetTabRect(i);
+                    if (r.Contains(e.Location)) //Wenn auf den Header geklickt wurde
+                    {
+                        ContextMenu cm = new ContextMenu();
+                        MenuItem mi = new MenuItem("Schliessen");
+                        mi.Click += ContextMenuClose_Clicked;
+                        cm.MenuItems.Add(mi);
+                        cm.Show(tabc, e.Location);
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Dem Fenster den Befehl erteilen, die Verbindung zu schliessen
+        /// </summary>
+        private void ContextMenuClose_Clicked(object sender, EventArgs e)
+        {
+            //Verbindung schliessen
+            RemoteDesktopTabPage t = (RemoteDesktopTabPage)tabc.SelectedTab;
+            RemoteDesktopTabPageView r = (RemoteDesktopTabPageView)t.Controls[0];
+            r.Disconnect();
+        }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.programmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmenuitemdirectconnection = new System.Windows.Forms.ToolStripMenuItem();
@@ -39,6 +40,7 @@
             this.rdplist = new RemoteDesktopManager.RemoteDesktopList();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tabc = new System.Windows.Forms.TabControl();
+            this.contextstriptabcontrol = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,6 +130,12 @@
             this.tabc.SelectedIndex = 0;
             this.tabc.Size = new System.Drawing.Size(1039, 606);
             this.tabc.TabIndex = 3;
+            this.tabc.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabc_MouseClick);
+            // 
+            // contextstriptabcontrol
+            // 
+            this.contextstriptabcontrol.Name = "contextstriptabcontrol";
+            this.contextstriptabcontrol.Size = new System.Drawing.Size(61, 4);
             // 
             // frmmain
             // 
@@ -163,6 +171,7 @@
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.TabControl tabc;
         private System.Windows.Forms.ToolStripMenuItem tsmenuitemstoreconnections;
+        private System.Windows.Forms.ContextMenuStrip contextstriptabcontrol;
     }
 }
 
