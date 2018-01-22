@@ -44,6 +44,7 @@
             this.lbconname.Size = new System.Drawing.Size(84, 16);
             this.lbconname.TabIndex = 0;
             this.lbconname.Text = "lbconname";
+            this.lbconname.DoubleClick += new System.EventHandler(this.lbconname_DoubleClick);
             // 
             // lbip
             // 
@@ -56,6 +57,7 @@
             this.lbip.Size = new System.Drawing.Size(23, 13);
             this.lbip.TabIndex = 0;
             this.lbip.Text = "lbip";
+            this.lbip.DoubleClick += new System.EventHandler(this.lbip_DoubleClick);
             // 
             // picimagerdp
             // 
@@ -66,6 +68,7 @@
             this.picimagerdp.Size = new System.Drawing.Size(48, 48);
             this.picimagerdp.TabIndex = 1;
             this.picimagerdp.TabStop = false;
+            this.picimagerdp.DoubleClick += new System.EventHandler(this.picimagerdp_DoubleClick);
             // 
             // RemoteDesktopListItem
             // 

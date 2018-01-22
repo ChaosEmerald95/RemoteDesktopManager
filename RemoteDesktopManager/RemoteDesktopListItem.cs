@@ -25,5 +25,28 @@ namespace RemoteDesktopManager
         /// Gibt die Informationen zur RemoteDesktop-Verbindung zurück
         /// </summary>
         public RemoteDesktopData RemoteDesktopData { get => m_data; }
+
+        #region DoubleClickRedirection
+        //Die Methoden dienen nur zur Weiterleitung des DoubleClick-Events, damit auch da
+        //das Event ausgelöst wird
+
+        private void picimagerdp_DoubleClick(object sender, System.EventArgs e)
+        {
+            //Event weitergeben
+            this.OnDoubleClick(e);
+        }
+
+        private void lbconname_DoubleClick(object sender, System.EventArgs e)
+        {
+            //Event weitergeben
+            this.OnDoubleClick(e);
+        }
+
+        private void lbip_DoubleClick(object sender, System.EventArgs e)
+        {
+            //Event weitergeben
+            this.OnDoubleClick(e);
+        }
+        #endregion
     }
 }
