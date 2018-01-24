@@ -73,6 +73,16 @@ namespace RemoteDesktopManager.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_hyperv_lockkeys {
+            get {
+                object obj = ResourceManager.GetObject("icon_hyperv_lockkeys", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap remote_desktop {
             get {
                 object obj = ResourceManager.GetObject("remote-desktop", resourceCulture);

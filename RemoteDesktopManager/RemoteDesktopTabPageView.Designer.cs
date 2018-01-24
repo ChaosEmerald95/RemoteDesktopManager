@@ -31,9 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RemoteDesktopTabPageView));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbtnlockkeycombination = new System.Windows.Forms.ToolStripButton();
             this.axMsRdpClient10NotSafeForScripting1 = new AxMSTSCLib.AxMsRdpClient10NotSafeForScripting();
             this.axMsRdpClient101 = new AxMSTSCLib.AxMsRdpClient10();
             this.rdp = new AxMSTSCLib.AxMsRdpClient9NotSafeForScripting();
+            this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axMsRdpClient10NotSafeForScripting1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axMsRdpClient101)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdp)).BeginInit();
@@ -49,11 +51,24 @@
             // 
             // toolStrip1
             // 
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbtnlockkeycombination});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(867, 25);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tsbtnlockkeycombination
+            // 
+            this.tsbtnlockkeycombination.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnlockkeycombination.Image = global::RemoteDesktopManager.Properties.Resources.icon_hyperv_lockkeys;
+            this.tsbtnlockkeycombination.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnlockkeycombination.Name = "tsbtnlockkeycombination";
+            this.tsbtnlockkeycombination.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnlockkeycombination.Text = "STRG+ALT+ENTF";
+            this.tsbtnlockkeycombination.Click += new System.EventHandler(this.tsbtnlockkeycombination_Click);
             // 
             // axMsRdpClient10NotSafeForScripting1
             // 
@@ -95,6 +110,8 @@
             this.Text = "RemoteDesktopTabPageView";
             this.Shown += new System.EventHandler(this.RemoteDesktopTabPageView_Shown);
             this.SizeChanged += new System.EventHandler(this.RemoteDesktopTabPageView_SizeChanged);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axMsRdpClient10NotSafeForScripting1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.axMsRdpClient101)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rdp)).EndInit();
@@ -110,5 +127,6 @@
         private AxMSTSCLib.AxMsRdpClient10NotSafeForScripting axMsRdpClient10NotSafeForScripting1;
         private AxMSTSCLib.AxMsRdpClient10 axMsRdpClient101;
         private AxMSTSCLib.AxMsRdpClient9NotSafeForScripting rdp;
+        private System.Windows.Forms.ToolStripButton tsbtnlockkeycombination;
     }
 }
