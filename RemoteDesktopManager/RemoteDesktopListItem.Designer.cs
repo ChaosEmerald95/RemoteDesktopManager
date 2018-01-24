@@ -28,10 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.lbconname = new System.Windows.Forms.Label();
             this.lbip = new System.Windows.Forms.Label();
             this.picimagerdp = new System.Windows.Forms.PictureBox();
+            this.contextsingleconnection = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmenuitemeditsettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmenuitemsdelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsmenuitemconnect = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.picimagerdp)).BeginInit();
+            this.contextsingleconnection.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbconname
@@ -70,18 +77,56 @@
             this.picimagerdp.TabStop = false;
             this.picimagerdp.DoubleClick += new System.EventHandler(this.picimagerdp_DoubleClick);
             // 
+            // contextsingleconnection
+            // 
+            this.contextsingleconnection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmenuitemconnect,
+            this.toolStripSeparator1,
+            this.tsmenuitemeditsettings,
+            this.tsmenuitemsdelete});
+            this.contextsingleconnection.Name = "contextsingleconnection";
+            this.contextsingleconnection.Size = new System.Drawing.Size(131, 76);
+            // 
+            // tsmenuitemeditsettings
+            // 
+            this.tsmenuitemeditsettings.Name = "tsmenuitemeditsettings";
+            this.tsmenuitemeditsettings.Size = new System.Drawing.Size(152, 22);
+            this.tsmenuitemeditsettings.Text = "Bearbeiten";
+            this.tsmenuitemeditsettings.Click += new System.EventHandler(this.tsmenuitemeditsettings_Click);
+            // 
+            // tsmenuitemsdelete
+            // 
+            this.tsmenuitemsdelete.Name = "tsmenuitemsdelete";
+            this.tsmenuitemsdelete.Size = new System.Drawing.Size(152, 22);
+            this.tsmenuitemsdelete.Text = "Lösschen";
+            this.tsmenuitemsdelete.Click += new System.EventHandler(this.tsmenuitemsdelete_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // tsmenuitemconnect
+            // 
+            this.tsmenuitemconnect.Name = "tsmenuitemconnect";
+            this.tsmenuitemconnect.Size = new System.Drawing.Size(152, 22);
+            this.tsmenuitemconnect.Text = "Verbinden";
+            this.tsmenuitemconnect.Click += new System.EventHandler(this.tsmenuitemconnect_Click);
+            // 
             // RemoteDesktopListItem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ContextMenuStrip = this.contextsingleconnection;
             this.Controls.Add(this.picimagerdp);
             this.Controls.Add(this.lbip);
             this.Controls.Add(this.lbconname);
             this.Name = "RemoteDesktopListItem";
             this.Size = new System.Drawing.Size(362, 55);
             ((System.ComponentModel.ISupportInitialize)(this.picimagerdp)).EndInit();
+            this.contextsingleconnection.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,5 +137,10 @@
         private System.Windows.Forms.Label lbconname;
         private System.Windows.Forms.Label lbip;
         private System.Windows.Forms.PictureBox picimagerdp;
+        private System.Windows.Forms.ContextMenuStrip contextsingleconnection;
+        private System.Windows.Forms.ToolStripMenuItem tsmenuitemconnect;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsmenuitemeditsettings;
+        private System.Windows.Forms.ToolStripMenuItem tsmenuitemsdelete;
     }
 }
