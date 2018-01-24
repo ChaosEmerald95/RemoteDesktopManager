@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ico_remotedesktopmanager.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -169,6 +172,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icon_hyperv_lockkeys.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ico_remotedesktopmanager.ico" />
+    <Content Include="Resources\ico_remotedesktopmanager.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
