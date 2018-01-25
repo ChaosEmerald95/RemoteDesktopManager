@@ -17,6 +17,9 @@ namespace RemoteDesktopManager
         {
             InitializeComponent();
 
+            //Titel festlegen
+            Text = "Verbindung mit " + ((char)34) + host + ((char)34);
+
             //RDP-Control einstellen
             rdp.Server = host;
             rdp.UserName = username;
@@ -35,7 +38,7 @@ namespace RemoteDesktopManager
             rdp.AdvancedSettings9.BitmapPeristence = 1;
             rdp.AdvancedSettings9.Compress = 1;
             rdp.AdvancedSettings9.DoubleClickDetect = 1;
-            rdp.AdvancedSettings9.SmartSizing = true;
+            rdp.AdvancedSettings9.SmartSizing = false;
             rdp.AdvancedSettings2.DisableCtrlAltDel = -1;
         }
 
@@ -51,9 +54,6 @@ namespace RemoteDesktopManager
         /// </summary>
         private void RemoteDesktopTabPageView_SizeChanged(object sender, EventArgs e)
         {
-            rdp.Dock = DockStyle.Fill;
-            rdp.DesktopWidth = rdp.Size.Width;
-            rdp.DesktopHeight = rdp.Size.Height;
         }
 
         /// <summary>

@@ -32,6 +32,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbtnlockkeycombination = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnfullscreen = new System.Windows.Forms.ToolStripButton();
             this.axMsRdpClient10NotSafeForScripting1 = new AxMSTSCLib.AxMsRdpClient10NotSafeForScripting();
             this.axMsRdpClient101 = new AxMSTSCLib.AxMsRdpClient10();
             this.rdp = new AxMSTSCLib.AxMsRdpClient9NotSafeForScripting();
@@ -53,7 +54,8 @@
             // 
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbtnlockkeycombination});
+            this.tsbtnlockkeycombination,
+            this.tsbtnfullscreen});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(867, 25);
@@ -69,6 +71,15 @@
             this.tsbtnlockkeycombination.Size = new System.Drawing.Size(23, 22);
             this.tsbtnlockkeycombination.Text = "STRG+ALT+ENTF";
             this.tsbtnlockkeycombination.Click += new System.EventHandler(this.tsbtnlockkeycombination_Click);
+            // 
+            // tsbtnfullscreen
+            // 
+            this.tsbtnfullscreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnfullscreen.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnfullscreen.Image")));
+            this.tsbtnfullscreen.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnfullscreen.Name = "tsbtnfullscreen";
+            this.tsbtnfullscreen.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnfullscreen.Text = "Vollbild";
             // 
             // axMsRdpClient10NotSafeForScripting1
             // 
@@ -93,9 +104,6 @@
             this.rdp.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("rdp.OcxState")));
             this.rdp.Size = new System.Drawing.Size(867, 554);
             this.rdp.TabIndex = 2;
-            this.rdp.OnConnecting += new System.EventHandler(this.rdp_OnConnecting);
-            this.rdp.OnConnected += new System.EventHandler(this.rdp_OnConnected);
-            this.rdp.OnDisconnected += new AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEventHandler(this.rdp_OnDisconnected);
             // 
             // RemoteDesktopTabPageView
             // 
@@ -105,7 +113,7 @@
             this.Controls.Add(this.rdp);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.statusStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RemoteDesktopTabPageView";
             this.Text = "RemoteDesktopTabPageView";
             this.Shown += new System.EventHandler(this.RemoteDesktopTabPageView_Shown);
@@ -126,7 +134,8 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private AxMSTSCLib.AxMsRdpClient10NotSafeForScripting axMsRdpClient10NotSafeForScripting1;
         private AxMSTSCLib.AxMsRdpClient10 axMsRdpClient101;
-        private AxMSTSCLib.AxMsRdpClient9NotSafeForScripting rdp;
         private System.Windows.Forms.ToolStripButton tsbtnlockkeycombination;
+        private AxMSTSCLib.AxMsRdpClient9NotSafeForScripting rdp;
+        private System.Windows.Forms.ToolStripButton tsbtnfullscreen;
     }
 }

@@ -95,5 +95,15 @@ namespace RemoteDesktopManager
             RemoteDesktopTabPageView r = (RemoteDesktopTabPageView)t.Controls[0];
             r.Disconnect();
         }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn eine TabPage entfernt wurde, sollen bestimmte  Controls neu gezeichnet werden
+        /// </summary>
+        private void tabc_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            rdplist.Visible = false;
+            rdplist.Visible = true;
+        }
     }
 }

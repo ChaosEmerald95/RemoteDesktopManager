@@ -131,6 +131,7 @@
             this.tabc.SelectedIndex = 0;
             this.tabc.Size = new System.Drawing.Size(1039, 606);
             this.tabc.TabIndex = 3;
+            this.tabc.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.tabc_ControlRemoved);
             this.tabc.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabc_MouseClick);
             // 
             // contextstriptabcontrol

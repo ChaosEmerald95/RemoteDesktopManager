@@ -13,6 +13,7 @@ namespace RemoteDesktopManager.Components
     public class RemoteDesktopTabPage : TabPage
     {
         private bool m_dispose = false; //Wenn auf true, dann soll keine TabPage hinzugefügt werden
+        RemoteDesktopTabPageView rdpView = null;
 
         /// <summary>
         /// Erstellt eine neue Instanz von RemoteDesktopTabPage
@@ -55,7 +56,7 @@ namespace RemoteDesktopManager.Components
             }
 
             //Fenster wird erstellt und mit Daten gefüttert
-            RemoteDesktopTabPageView rdpView = new RemoteDesktopTabPageView(rdpData.IpAdresse, username, password, domain);
+            rdpView = new RemoteDesktopTabPageView(rdpData.IpAdresse, username, password, domain);
             rdpView.Dock = DockStyle.Fill;
             rdpView.TopLevel = false;
             rdpView.FormBorderStyle = FormBorderStyle.None;
@@ -69,8 +70,11 @@ namespace RemoteDesktopManager.Components
             //ContextMenuStrip erstellen und konfigurieren
             ContextMenuStrip strip = new ContextMenuStrip();
             ToolStripItem tsitem1 = new ToolStripMenuItem("Schliessen");
+            ToolStripItem tsitem2 = new ToolStripMenuItem("Abdocken");
             tsitem1.Click += ContextMenuClose_Clicked;
+            tsitem2.Click += ContextMenuUndock_Clicked;
             strip.Items.Add(tsitem1);
+            strip.Items.Add(tsitem2);
 
             //ContextMenuStrip der TabPage hinzufügen
             ContextMenuStrip = strip;
@@ -93,6 +97,25 @@ namespace RemoteDesktopManager.Components
             //Verbindung schliessen
             RemoteDesktopTabPageView r = (RemoteDesktopTabPageView)Controls[0];
             r.Disconnect();
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Dockt das Fenster aus der TabPage
+        /// </summary>
+        private void ContextMenuUndock_Clicked(object sender, EventArgs e)
+        {
+            //Fenster abdocken
+            rdpView.Dock = DockStyle.None;
+            rdpView.Hide();
+            Controls.RemoveAt(0);
+            rdpView.TopLevel = true;
+            rdpView.FormBorderStyle = FormBorderStyle.Sizable;
+            rdpView.ShowIcon = true;
+            rdpView.ShowInTaskbar = true;
+            rdpView.DesktopLocation = new System.Drawing.Point(250, 100);
+            rdpView.Show();
+            Dispose();
         }
     }
 }
