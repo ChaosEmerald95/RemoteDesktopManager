@@ -14,10 +14,10 @@ namespace RemoteDesktopManager
         /// Schreibt eine INFO-Message in den Log
         /// </summary>
         /// <param name="message">Die zu speichernde Nachricht</param>
-        public static void StoreRdpLogMessage(string message)
+        public static void StoreRdpLogMessage(string message, [CallerMemberName] string memberName = "")
         {
             StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\rdplog.log", true);
-            sw.WriteLine("[" + DateTime.Now.ToString() + "] INFO: " + message);
+            sw.WriteLine("[" + DateTime.Now.ToString() + "] INFO: " + memberName + "() :: " + message);
             sw.Close();
         }
 
@@ -25,10 +25,10 @@ namespace RemoteDesktopManager
         /// Schreibt eine WARNING-Message in den Log
         /// </summary>
         /// <param name="message">Die zu speichernde Nachricht</param>
-        public static void StoreWarningRdpLogMessage(string message)
+        public static void StoreWarningRdpLogMessage(string message, [CallerMemberName] string memberName = "")
         {
             StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\rdplog.log", true);
-            sw.WriteLine("[" + DateTime.Now.ToString() + "] WARNING: " + message);
+            sw.WriteLine("[" + DateTime.Now.ToString() + "] WARNING: " + memberName + "() :: " + message);
             sw.Close();
         }
 
@@ -36,10 +36,10 @@ namespace RemoteDesktopManager
         /// Schreibt eine ERROR-Message in den Log
         /// </summary>
         /// <param name="message">Die zu speichernde Nachricht</param>
-        public static void StoreErrorRdpLogMessage(string message)
+        public static void StoreErrorRdpLogMessage(string message, [CallerMemberName] string memberName = "")
         {
             StreamWriter sw = new StreamWriter(Directory.GetCurrentDirectory() + @"\rdplog.log", true);
-            sw.WriteLine("[" + DateTime.Now.ToString() + "] ERROR: " + message);
+            sw.WriteLine("[" + DateTime.Now.ToString() + "] ERROR: " + memberName + "() :: " + message);
             sw.Close();
         }
     }
@@ -64,7 +64,7 @@ namespace RemoteDesktopManager
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static void ShowMessageInConsole(string message, DebugMessageType type = DebugMessageType.Info, [CallerMemberName] string memberName = "", [CallerFilePath] string sourceFilePath = "", [CallerLineNumber] int sourceLineNumber = 0)
         {
-            Debug.Print("[" + DateTime.Now.ToString() + "] " + type.ToString() + sourceFilePath + "(" + sourceLineNumber.ToString() + "): " + message);
+            Debug.Print("[" + DateTime.Now.ToString() + "] " + type.ToString() + sourceFilePath + "(" + sourceLineNumber.ToString() + "): " + memberName + "() :: " + message);
         }
     }
 }

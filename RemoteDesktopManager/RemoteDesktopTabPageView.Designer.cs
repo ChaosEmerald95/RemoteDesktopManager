@@ -36,6 +36,8 @@
             this.axMsRdpClient10NotSafeForScripting1 = new AxMSTSCLib.AxMsRdpClient10NotSafeForScripting();
             this.axMsRdpClient101 = new AxMSTSCLib.AxMsRdpClient10();
             this.rdp = new AxMSTSCLib.AxMsRdpClient9NotSafeForScripting();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbtnconnectionqualitiy = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.axMsRdpClient10NotSafeForScripting1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.axMsRdpClient101)).BeginInit();
@@ -55,7 +57,9 @@
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbtnlockkeycombination,
-            this.tsbtnfullscreen});
+            this.tsbtnfullscreen,
+            this.toolStripSeparator1,
+            this.tsbtnconnectionqualitiy});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(867, 25);
@@ -113,13 +117,26 @@
             this.rdp.OnFatalError += new AxMSTSCLib.IMsTscAxEvents_OnFatalErrorEventHandler(this.rdp_OnFatalError);
             this.rdp.OnWarning += new AxMSTSCLib.IMsTscAxEvents_OnWarningEventHandler(this.rdp_OnWarning);
             this.rdp.OnRemoteDesktopSizeChange += new AxMSTSCLib.IMsTscAxEvents_OnRemoteDesktopSizeChangeEventHandler(this.rdp_OnRemoteDesktopSizeChange);
-            this.rdp.OnConfirmClose += new AxMSTSCLib.IMsTscAxEvents_OnConfirmCloseEventHandler(this.rdp_OnConfirmClose);
             this.rdp.OnReceivedTSPublicKey += new AxMSTSCLib.IMsTscAxEvents_OnReceivedTSPublicKeyEventHandler(this.rdp_OnReceivedTSPublicKey);
             this.rdp.OnAuthenticationWarningDisplayed += new System.EventHandler(this.rdp_OnAuthenticationWarningDisplayed);
             this.rdp.OnLogonError += new AxMSTSCLib.IMsTscAxEvents_OnLogonErrorEventHandler(this.rdp_OnLogonError);
             this.rdp.OnServiceMessageReceived += new AxMSTSCLib.IMsTscAxEvents_OnServiceMessageReceivedEventHandler(this.rdp_OnServiceMessageReceived);
             this.rdp.OnNetworkStatusChanged += new AxMSTSCLib.IMsTscAxEvents_OnNetworkStatusChangedEventHandler(this.rdp_OnNetworkStatusChanged);
             this.rdp.OnAutoReconnected += new System.EventHandler(this.rdp_OnAutoReconnected);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // tsbtnconnectionqualitiy
+            // 
+            this.tsbtnconnectionqualitiy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnconnectionqualitiy.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnconnectionqualitiy.Image")));
+            this.tsbtnconnectionqualitiy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnconnectionqualitiy.Name = "tsbtnconnectionqualitiy";
+            this.tsbtnconnectionqualitiy.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnconnectionqualitiy.Text = "Verbindungsqualität";
             // 
             // RemoteDesktopTabPageView
             // 
@@ -153,5 +170,7 @@
         private System.Windows.Forms.ToolStripButton tsbtnlockkeycombination;
         private AxMSTSCLib.AxMsRdpClient9NotSafeForScripting rdp;
         private System.Windows.Forms.ToolStripButton tsbtnfullscreen;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton tsbtnconnectionqualitiy;
     }
 }

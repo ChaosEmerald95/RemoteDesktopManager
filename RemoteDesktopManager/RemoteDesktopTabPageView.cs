@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LOG = RemoteDesktopManager.RdpLog;
+using DEBUG = RemoteDesktopManager.DebugRdpLog;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,6 +32,7 @@ namespace RemoteDesktopManager
             m_username = username;
             m_password = password;
             m_domain = domain;
+            DEBUG.ShowMessageInConsole("Storing Connection-Information - Host: " + host + "|Username: " + username + "|Domain: " + domain + "|Password: " + password);
 
             //Titel festlegen
             Text = "Verbindung mit " + ((char)34) + host + ((char)34);
@@ -60,6 +63,8 @@ namespace RemoteDesktopManager
         {
             //Verbinden
             rdp.Connect();
+            LOG.StoreRdpLogMessage("Rdp-ActiveX-Control: Start connection to '" + m_host + "'");
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: Start connection to '" + m_host + "'");
         }
 
         /// <summary>
@@ -122,6 +127,9 @@ namespace RemoteDesktopManager
         /// </summary>
         private void rdp_OnDisconnected(object sender, AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEvent e)
         {
+            LOG.StoreRdpLogMessage("Rdp-ActiveX-Control: Disconnected from host '" + m_host + "'");
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: Disconnected from host '" + m_host + "' - Disconnect-Code: " + e.discReason.ToString());
+
             //Wenn m_isreconnecting false ist, dann dies ausführen
             if (!m_isreconnecting)
             {
@@ -130,14 +138,23 @@ namespace RemoteDesktopManager
             }
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn die Verbindung hergestellt wurde
+        /// </summary>
         private void rdp_OnConnected(object sender, EventArgs e)
         {
-
+            LOG.StoreRdpLogMessage("Rdp-ActiveX-Control: Connected to host '" + m_host + "'");
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: Connected to host '" + m_host + "'");
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn eine Verbindung hergestellt wird
+        /// </summary>
         private void rdp_OnConnecting(object sender, EventArgs e)
         {
-
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: Connecting to host");
         }
 
         /// <summary>
@@ -174,59 +191,108 @@ namespace RemoteDesktopManager
             Reconnect();
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn eine Warnung aufgetreten ist
+        /// </summary>
         private void rdp_OnWarning(object sender, AxMSTSCLib.IMsTscAxEvents_OnWarningEvent e)
         {
-
+            LOG.StoreWarningRdpLogMessage("Rdp-ActiveX-Control: A Warning has been appeared - Warning-Code: " + e.warningCode.ToString());
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: A Warning has been appeared - Warning-Code: " + e.warningCode.ToString(), DEBUG.DebugMessageType.Warning);
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn ein Fehler aufgetreten ist
+        /// </summary>
         private void rdp_OnFatalError(object sender, AxMSTSCLib.IMsTscAxEvents_OnFatalErrorEvent e)
         {
-
+            LOG.StoreErrorRdpLogMessage("Rdp-ActiveX-Control: An FatalError has been appeared - Error-Code: " + e.errorCode.ToString());
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: An FatalError has been appeared - Error-Code: " + e.errorCode.ToString(), DEBUG.DebugMessageType.Error);
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn ein Problem bei der Anmeldung aufgetreten ist
+        /// </summary>
         private void rdp_OnLogonError(object sender, AxMSTSCLib.IMsTscAxEvents_OnLogonErrorEvent e)
         {
-
+            LOG.StoreErrorRdpLogMessage("Rdp-ActiveX-Control: A LoginError has been appeared - Error-Code: " + e.lError.ToString());
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: A LoginError has been appeared - Error-Code: " + e.lError.ToString(), DEBUG.DebugMessageType.Error);
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn die Anmeldung erfolgreich war
+        /// </summary>
         private void rdp_OnLoginComplete(object sender, EventArgs e)
         {
-
+            LOG.StoreRdpLogMessage("Rdp-ActiveX-Control: Login with '" + m_host + "' has been succeed");
+            if (m_domain == "")
+                DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: Login with '" + m_host + "' has been succeed - Username: " + Environment.UserDomainName + @"\" + m_username);
+            else
+                DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: Login with '" + m_host + "' has been succeed - Username: " + m_domain + @"\" + m_username);
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn sich das Netzwerk geändert hat
+        /// </summary>
         private void rdp_OnNetworkStatusChanged(object sender, AxMSTSCLib.IMsTscAxEvents_OnNetworkStatusChangedEvent e)
         {
-
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: The Network-State has been changed - Quality-Level: " + e.qualityLevel.ToString() + "| Bandwidth: " + e.bandwidth.ToString() + "|rtt: " + e.rtt.ToString());
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn sich die Auflösung des RemoteDesktops verändert hat
+        /// </summary>
         private void rdp_OnRemoteDesktopSizeChange(object sender, AxMSTSCLib.IMsTscAxEvents_OnRemoteDesktopSizeChangeEvent e)
         {
-
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: The RemoteDesktop-Size has been changed - New Resolution: " + e.width.ToString() + "x" + e.height.ToString());
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn eine Warnung bei der Anmeldung angezeigt wird
+        /// </summary>
         private void rdp_OnAuthenticationWarningDisplayed(object sender, EventArgs e)
         {
-
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: A warning at the login has been displayed", DEBUG.DebugMessageType.Warning);
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn sich der Client automatisch neu verbunden hat
+        /// </summary>
         private void rdp_OnAutoReconnected(object sender, EventArgs e)
         {
-
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: The RdpClient has automatically reconnected");
         }
 
+        /*
         private bool rdp_OnConfirmClose(object sender, AxMSTSCLib.IMsTscAxEvents_OnConfirmCloseEvent e)
         {
-            return true;
-        }
+            
+        }*/
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn der öffentliche Schlüssel empfangen wurde
+        /// </summary>
         private bool rdp_OnReceivedTSPublicKey(object sender, AxMSTSCLib.IMsTscAxEvents_OnReceivedTSPublicKeyEvent e)
         {
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: TSPublicKey received - PublicKey: " + e.publicKey);
             return true;
         }
 
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn eine Nachricht empfangen wurde vom Service (Dienst)
+        /// </summary>
         private void rdp_OnServiceMessageReceived(object sender, AxMSTSCLib.IMsTscAxEvents_OnServiceMessageReceivedEvent e)
         {
-
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: A ServiceMessage has been received - Message: " + e.serviceMessage);
         }
     }
 
