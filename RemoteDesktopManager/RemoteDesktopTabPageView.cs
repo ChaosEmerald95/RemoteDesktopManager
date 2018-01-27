@@ -55,7 +55,7 @@ namespace RemoteDesktopManager
             rdp.AdvancedSettings9.BitmapPeristence = 1;
             rdp.AdvancedSettings9.Compress = 1;
             rdp.AdvancedSettings9.DoubleClickDetect = 1;
-            rdp.AdvancedSettings9.SmartSizing = true;
+            rdp.AdvancedSettings9.SmartSizing = false;
             rdp.AdvancedSettings2.DisableCtrlAltDel = -1;
         }
 
@@ -240,7 +240,20 @@ namespace RemoteDesktopManager
         /// </summary>
         private void rdp_OnNetworkStatusChanged(object sender, AxMSTSCLib.IMsTscAxEvents_OnNetworkStatusChangedEvent e)
         {
-            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: The Network-State has been changed - Quality-Level: " + e.qualityLevel.ToString() + "| Bandwidth: " + e.bandwidth.ToString() + "|rtt: " + e.rtt.ToString());
+            //Werte darstellen
+            switch (e.qualityLevel) //Quality-Level
+            {
+                case 0: tsbtnconnectionqualitiy.Image = global::RemoteDesktopManager.Properties.Resources.icon_rdpquality_level0; break;
+                case 1: tsbtnconnectionqualitiy.Image = global::RemoteDesktopManager.Properties.Resources.icon_rdpquality_level1; break;
+                case 2: tsbtnconnectionqualitiy.Image = global::RemoteDesktopManager.Properties.Resources.icon_rdpquality_level2; break;
+                case 3: tsbtnconnectionqualitiy.Image = global::RemoteDesktopManager.Properties.Resources.icon_rdpquality_level3; break;
+                case 4: tsbtnconnectionqualitiy.Image = global::RemoteDesktopManager.Properties.Resources.icon_rdpquality_level4; break;
+            }
+            tslbbandwidth.Text = (e.bandwidth / 1024).ToString() + " KBit/s";
+            tslbping.Text = e.rtt.ToString();
+
+            //Debug-Log anzeigen
+            DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: The Network-State has been changed - Quality-Level: " + e.qualityLevel.ToString() + "| Bandwidth: " + e.bandwidth.ToString() + "|Ping: " + e.rtt.ToString());
         }
 
         /// <summary>
@@ -270,12 +283,6 @@ namespace RemoteDesktopManager
             DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: The RdpClient has automatically reconnected");
         }
 
-        /*
-        private bool rdp_OnConfirmClose(object sender, AxMSTSCLib.IMsTscAxEvents_OnConfirmCloseEvent e)
-        {
-            
-        }*/
-
         /// <summary>
         /// Event-Methode:
         /// Wenn der öffentliche Schlüssel empfangen wurde
@@ -293,6 +300,15 @@ namespace RemoteDesktopManager
         private void rdp_OnServiceMessageReceived(object sender, AxMSTSCLib.IMsTscAxEvents_OnServiceMessageReceivedEvent e)
         {
             DEBUG.ShowMessageInConsole("Rdp-ActiveX-Control: A ServiceMessage has been received - Message: " + e.serviceMessage);
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Wenn auf den Button mit dem Icon für die verbindungsqualität geklickt wird
+        /// </summary>
+        private void tsbtnconnectionqualitiy_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

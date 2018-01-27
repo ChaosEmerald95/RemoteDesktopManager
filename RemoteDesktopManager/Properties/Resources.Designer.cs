@@ -93,6 +93,56 @@ namespace RemoteDesktopManager.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_rdpquality_level0 {
+            get {
+                object obj = ResourceManager.GetObject("icon_rdpquality_level0", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_rdpquality_level1 {
+            get {
+                object obj = ResourceManager.GetObject("icon_rdpquality_level1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_rdpquality_level2 {
+            get {
+                object obj = ResourceManager.GetObject("icon_rdpquality_level2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_rdpquality_level3 {
+            get {
+                object obj = ResourceManager.GetObject("icon_rdpquality_level3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_rdpquality_level4 {
+            get {
+                object obj = ResourceManager.GetObject("icon_rdpquality_level4", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap img_remotedesktop_config {
             get {
                 object obj = ResourceManager.GetObject("img_remotedesktop_config", resourceCulture);
