@@ -124,10 +124,13 @@
   <data name="ButtonFace" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\ButtonFace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="remote-desktop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="img_remotedesktop_config" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\remote-desktop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_hyperv_lockkeys" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon_hyperv_lockkeys.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="icon_fullscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\icon_fullscreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

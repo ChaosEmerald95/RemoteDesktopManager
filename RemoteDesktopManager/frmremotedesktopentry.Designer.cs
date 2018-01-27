@@ -142,7 +142,7 @@
             // 
             // picimagerdp
             // 
-            this.picimagerdp.BackgroundImage = global::RemoteDesktopManager.Properties.Resources.remote_desktop;
+            this.picimagerdp.BackgroundImage = global::RemoteDesktopManager.Properties.Resources.img_remotedesktop_config;
             this.picimagerdp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.picimagerdp.Location = new System.Drawing.Point(2, 2);
             this.picimagerdp.Name = "picimagerdp";

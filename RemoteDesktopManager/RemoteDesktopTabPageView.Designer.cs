@@ -75,7 +75,7 @@
             // tsbtnfullscreen
             // 
             this.tsbtnfullscreen.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtnfullscreen.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnfullscreen.Image")));
+            this.tsbtnfullscreen.Image = global::RemoteDesktopManager.Properties.Resources.icon_fullscreen;
             this.tsbtnfullscreen.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbtnfullscreen.Name = "tsbtnfullscreen";
             this.tsbtnfullscreen.Size = new System.Drawing.Size(23, 22);

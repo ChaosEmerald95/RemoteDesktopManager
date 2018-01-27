@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ico_remotedesktopmanager.ico" />
+    <None Include="Resources\icon_fullscreen.png" />
     <Content Include="Resources\ico_remoteconnect_vmconnect.ico" />
     <Content Include="Resources\ico_remotedesktopmanager.ico" />
   </ItemGroup>

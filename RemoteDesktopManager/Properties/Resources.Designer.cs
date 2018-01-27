@@ -73,6 +73,16 @@ namespace RemoteDesktopManager.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_fullscreen {
+            get {
+                object obj = ResourceManager.GetObject("icon_fullscreen", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_hyperv_lockkeys {
             get {
                 object obj = ResourceManager.GetObject("icon_hyperv_lockkeys", resourceCulture);
@@ -83,9 +93,9 @@ namespace RemoteDesktopManager.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap remote_desktop {
+        internal static System.Drawing.Bitmap img_remotedesktop_config {
             get {
-                object obj = ResourceManager.GetObject("remote-desktop", resourceCulture);
+                object obj = ResourceManager.GetObject("img_remotedesktop_config", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
