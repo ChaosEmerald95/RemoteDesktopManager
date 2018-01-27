@@ -13,6 +13,9 @@ namespace RemoteDesktopManager
 {
     public partial class frmmain : Form
     {
+        /// <summary>
+        /// Erstellt eine neue Instanz von frmabout
+        /// </summary>
         public frmmain()
         {
             InitializeComponent();
@@ -122,6 +125,15 @@ namespace RemoteDesktopManager
         {
             rdplist.Visible = false;
             rdplist.Visible = true;
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Zeigt das About_Fenster zur Anwendung an
+        /// </summary>
+        private void infoÜberRemoteDesktopManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new frmabout().ShowDialog();
         }
     }
 }

@@ -105,6 +105,7 @@
             this.infoÜberRemoteDesktopManagerToolStripMenuItem.Name = "infoÜberRemoteDesktopManagerToolStripMenuItem";
             this.infoÜberRemoteDesktopManagerToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
             this.infoÜberRemoteDesktopManagerToolStripMenuItem.Text = "Info über RemoteDesktop-Manager";
+            this.infoÜberRemoteDesktopManagerToolStripMenuItem.Click += new System.EventHandler(this.infoÜberRemoteDesktopManagerToolStripMenuItem_Click);
             // 
             // rdplist
             // 

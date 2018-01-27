@@ -54,6 +54,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ConnectionFileHandler.cs" />
+    <Compile Include="frmabout.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmabout.Designer.cs">
+      <DependentUpon>frmabout.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmenterconnectiondata.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +112,9 @@
     <Compile Include="RemoteDesktopTabPageView.Designer.cs">
       <DependentUpon>RemoteDesktopTabPageView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="frmabout.resx">
+      <DependentUpon>frmabout.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmenterconnectiondata.resx">
       <DependentUpon>frmenterconnectiondata.cs</DependentUpon>
     </EmbeddedResource>
