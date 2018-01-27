@@ -80,6 +80,7 @@
             this.tsbtnfullscreen.Name = "tsbtnfullscreen";
             this.tsbtnfullscreen.Size = new System.Drawing.Size(23, 22);
             this.tsbtnfullscreen.Text = "Vollbild";
+            this.tsbtnfullscreen.Click += new System.EventHandler(this.tsbtnfullscreen_Click);
             // 
             // axMsRdpClient10NotSafeForScripting1
             // 
@@ -104,6 +105,21 @@
             this.rdp.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("rdp.OcxState")));
             this.rdp.Size = new System.Drawing.Size(867, 554);
             this.rdp.TabIndex = 2;
+            this.rdp.OnConnecting += new System.EventHandler(this.rdp_OnConnecting);
+            this.rdp.OnConnected += new System.EventHandler(this.rdp_OnConnected);
+            this.rdp.OnLoginComplete += new System.EventHandler(this.rdp_OnLoginComplete);
+            this.rdp.OnDisconnected += new AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEventHandler(this.rdp_OnDisconnected);
+            this.rdp.OnLeaveFullScreenMode += new System.EventHandler(this.rdp_OnLeaveFullScreenMode);
+            this.rdp.OnFatalError += new AxMSTSCLib.IMsTscAxEvents_OnFatalErrorEventHandler(this.rdp_OnFatalError);
+            this.rdp.OnWarning += new AxMSTSCLib.IMsTscAxEvents_OnWarningEventHandler(this.rdp_OnWarning);
+            this.rdp.OnRemoteDesktopSizeChange += new AxMSTSCLib.IMsTscAxEvents_OnRemoteDesktopSizeChangeEventHandler(this.rdp_OnRemoteDesktopSizeChange);
+            this.rdp.OnConfirmClose += new AxMSTSCLib.IMsTscAxEvents_OnConfirmCloseEventHandler(this.rdp_OnConfirmClose);
+            this.rdp.OnReceivedTSPublicKey += new AxMSTSCLib.IMsTscAxEvents_OnReceivedTSPublicKeyEventHandler(this.rdp_OnReceivedTSPublicKey);
+            this.rdp.OnAuthenticationWarningDisplayed += new System.EventHandler(this.rdp_OnAuthenticationWarningDisplayed);
+            this.rdp.OnLogonError += new AxMSTSCLib.IMsTscAxEvents_OnLogonErrorEventHandler(this.rdp_OnLogonError);
+            this.rdp.OnServiceMessageReceived += new AxMSTSCLib.IMsTscAxEvents_OnServiceMessageReceivedEventHandler(this.rdp_OnServiceMessageReceived);
+            this.rdp.OnNetworkStatusChanged += new AxMSTSCLib.IMsTscAxEvents_OnNetworkStatusChangedEventHandler(this.rdp_OnNetworkStatusChanged);
+            this.rdp.OnAutoReconnected += new System.EventHandler(this.rdp_OnAutoReconnected);
             // 
             // RemoteDesktopTabPageView
             // 

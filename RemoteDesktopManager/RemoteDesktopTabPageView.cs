@@ -13,9 +13,23 @@ namespace RemoteDesktopManager
 {
     public partial class RemoteDesktopTabPageView : Form
     {
+        private bool m_isreconnecting = false; //Wenn das true ist, dann darf das Disconnected-Event die TabPage nicht disposen
+
+        //Variablen für spätere Reconnects
+        private string m_host = "";
+        private string m_username = "";
+        private string m_password = "";
+        private string m_domain = "";
+
         public RemoteDesktopTabPageView(string host, string username, string password, string domain = "")
         {
             InitializeComponent();
+
+            //Variablen für spätere Reconnects zwischenspeichern
+            m_host = host;
+            m_username = username;
+            m_password = password;
+            m_domain = domain;
 
             //Titel festlegen
             Text = "Verbindung mit " + ((char)34) + host + ((char)34);
@@ -38,7 +52,7 @@ namespace RemoteDesktopManager
             rdp.AdvancedSettings9.BitmapPeristence = 1;
             rdp.AdvancedSettings9.Compress = 1;
             rdp.AdvancedSettings9.DoubleClickDetect = 1;
-            rdp.AdvancedSettings9.SmartSizing = false;
+            rdp.AdvancedSettings9.SmartSizing = true;
             rdp.AdvancedSettings2.DisableCtrlAltDel = -1;
         }
 
@@ -61,7 +75,45 @@ namespace RemoteDesktopManager
         /// </summary>
         public void Disconnect()
         {
-            rdp.Disconnect();
+            if (rdp.Connected != 0)
+            {
+                rdp.Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// Trennt die Verbindung und stellt die erneut her
+        /// </summary>
+        /// <param name="fullscreen">Wenn Vollbild, dann wird die Auflösung entsprechend angepasst. Wenn false, dann wird es an die Größe des Controls gebunden</param>
+        private void Reconnect(bool fullscreen = false)
+        {
+            m_isreconnecting = true; //Damit die Events Bescheid wissen
+            Disconnect();
+
+            //Solange das TRennen noch dauert, Programm festhalten
+            while (rdp.Connected != 0)
+            {
+                System.Threading.Thread.Sleep(1000);
+                Application.DoEvents();
+            }
+
+            //Verbindung erneut herstellen. Vorher die Einstellungen anpassen
+            if (fullscreen)
+            {
+                rdp.DesktopWidth = Screen.PrimaryScreen.Bounds.Width;
+                rdp.DesktopHeight = Screen.PrimaryScreen.Bounds.Height;
+                rdp.FullScreen = true;
+            }
+            else
+            {
+                rdp.DesktopWidth = rdp.Width;
+                rdp.DesktopHeight = rdp.Height;
+                rdp.FullScreen = false;
+            }
+
+            //Verbindung herstellen
+            rdp.Connect();
+            m_isreconnecting = false; //Damit die Events Bescheid wissen
         }
 
         /// <summary>
@@ -70,8 +122,12 @@ namespace RemoteDesktopManager
         /// </summary>
         private void rdp_OnDisconnected(object sender, AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEvent e)
         {
-            //Zwingt die TabPage, zu verschwinden
-            base.Parent.Dispose(); 
+            //Wenn m_isreconnecting false ist, dann dies ausführen
+            if (!m_isreconnecting)
+            {
+                //Zwingt die TabPage, zu verschwinden
+                base.Parent.Dispose();
+            }
         }
 
         private void rdp_OnConnected(object sender, EventArgs e)
@@ -97,6 +153,80 @@ namespace RemoteDesktopManager
             //0x38: MENU / ALT
             //0x53: DEL
             t_wrapper.SendKeys(new int[] { 0x1d, 0x38, 0x53, 0x53, 0x38, 0x1d}, new bool[] { false, false, false, true, true, true });
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Schaltet das RDP-Control in den Vollbild-Modus
+        /// </summary>
+        private void tsbtnfullscreen_Click(object sender, EventArgs e)
+        {
+            rdp.FullScreenTitle = rdp.Server;
+            Reconnect(true);
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Schaltet das RDP-Control in den FitToScreen-Modus
+        /// </summary>
+        private void rdp_OnLeaveFullScreenMode(object sender, EventArgs e)
+        {
+            Reconnect();
+        }
+
+        private void rdp_OnWarning(object sender, AxMSTSCLib.IMsTscAxEvents_OnWarningEvent e)
+        {
+
+        }
+
+        private void rdp_OnFatalError(object sender, AxMSTSCLib.IMsTscAxEvents_OnFatalErrorEvent e)
+        {
+
+        }
+
+        private void rdp_OnLogonError(object sender, AxMSTSCLib.IMsTscAxEvents_OnLogonErrorEvent e)
+        {
+
+        }
+
+        private void rdp_OnLoginComplete(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdp_OnNetworkStatusChanged(object sender, AxMSTSCLib.IMsTscAxEvents_OnNetworkStatusChangedEvent e)
+        {
+
+        }
+
+        private void rdp_OnRemoteDesktopSizeChange(object sender, AxMSTSCLib.IMsTscAxEvents_OnRemoteDesktopSizeChangeEvent e)
+        {
+
+        }
+
+        private void rdp_OnAuthenticationWarningDisplayed(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rdp_OnAutoReconnected(object sender, EventArgs e)
+        {
+
+        }
+
+        private bool rdp_OnConfirmClose(object sender, AxMSTSCLib.IMsTscAxEvents_OnConfirmCloseEvent e)
+        {
+            return true;
+        }
+
+        private bool rdp_OnReceivedTSPublicKey(object sender, AxMSTSCLib.IMsTscAxEvents_OnReceivedTSPublicKeyEvent e)
+        {
+            return true;
+        }
+
+        private void rdp_OnServiceMessageReceived(object sender, AxMSTSCLib.IMsTscAxEvents_OnServiceMessageReceivedEvent e)
+        {
+
         }
     }
 
