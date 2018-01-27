@@ -16,6 +16,7 @@ namespace RemoteDesktopManager
     public partial class RemoteDesktopTabPageView : Form
     {
         private bool m_isreconnecting = false; //Wenn das true ist, dann darf das Disconnected-Event die TabPage nicht disposen
+        private int m_rdpquality = 0; //Die Qualität der Remotedesktopverbindung für das Dialogfenster
 
         //Variablen für spätere Reconnects
         private string m_host = "";
@@ -249,6 +250,7 @@ namespace RemoteDesktopManager
                 case 3: tsbtnconnectionqualitiy.Image = global::RemoteDesktopManager.Properties.Resources.icon_rdpquality_level3; break;
                 case 4: tsbtnconnectionqualitiy.Image = global::RemoteDesktopManager.Properties.Resources.icon_rdpquality_level4; break;
             }
+            m_rdpquality = (int)e.qualityLevel; //Level zwischenspeichern
             tslbbandwidth.Text = (e.bandwidth / 1024).ToString() + " KBit/s";
             tslbping.Text = e.rtt.ToString();
 
@@ -306,9 +308,10 @@ namespace RemoteDesktopManager
         /// Event-Methode:
         /// Wenn auf den Button mit dem Icon für die verbindungsqualität geklickt wird
         /// </summary>
-        private void tsbtnconnectionqualitiy_Click(object sender, EventArgs e)
+        private void tsbtnconnectionquality_Click(object sender, EventArgs e)
         {
-
+            //Zeigt den Qualitätsstatus als Text in einem separaten Dialog an
+            new frmshowrdpqualitystate(m_rdpquality).ShowDialog();
         }
     }
 

@@ -98,7 +98,7 @@
             this.tsbtnconnectionqualitiy.Name = "tsbtnconnectionqualitiy";
             this.tsbtnconnectionqualitiy.Size = new System.Drawing.Size(23, 22);
             this.tsbtnconnectionqualitiy.Text = "Verbindungsqualität";
-            this.tsbtnconnectionqualitiy.Click += new System.EventHandler(this.tsbtnconnectionqualitiy_Click);
+            this.tsbtnconnectionqualitiy.Click += new System.EventHandler(this.tsbtnconnectionquality_Click);
             // 
             // axMsRdpClient10NotSafeForScripting1
             // 

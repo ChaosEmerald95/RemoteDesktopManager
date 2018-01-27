@@ -78,6 +78,12 @@
     <Compile Include="frmremotedesktopentry.Designer.cs">
       <DependentUpon>frmremotedesktopentry.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmshowrdpqualitystate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmshowrdpqualitystate.Designer.cs">
+      <DependentUpon>frmshowrdpqualitystate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RdpLog.cs" />
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmremotedesktopentry.resx">
       <DependentUpon>frmremotedesktopentry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmshowrdpqualitystate.resx">
+      <DependentUpon>frmshowrdpqualitystate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
