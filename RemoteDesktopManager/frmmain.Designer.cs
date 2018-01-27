@@ -38,10 +38,10 @@
             this.tsmenuitemcloseapplication = new System.Windows.Forms.ToolStripMenuItem();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoÜberRemoteDesktopManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rdplist = new RemoteDesktopManager.RemoteDesktopList();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tabc = new System.Windows.Forms.TabControl();
             this.contextstriptabcontrol = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.rdplist = new RemoteDesktopManager.RemoteDesktopList();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,15 +105,7 @@
             this.infoÜberRemoteDesktopManagerToolStripMenuItem.Name = "infoÜberRemoteDesktopManagerToolStripMenuItem";
             this.infoÜberRemoteDesktopManagerToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
             this.infoÜberRemoteDesktopManagerToolStripMenuItem.Text = "Info über RemoteDesktop-Manager";
-            // 
-            // rdplist
-            // 
-            this.rdplist.Dock = System.Windows.Forms.DockStyle.Left;
-            this.rdplist.Location = new System.Drawing.Point(0, 24);
-            this.rdplist.Name = "rdplist";
-            this.rdplist.Size = new System.Drawing.Size(232, 606);
-            this.rdplist.TabIndex = 1;
-            this.rdplist.RemoteDesktopItemClicked += new RemoteDesktopManager.RemoteDesktopItemEventHandler(this.rdplist_RemoteDesktopItemClicked);
+            this.infoÜberRemoteDesktopManagerToolStripMenuItem.Click += new System.EventHandler(this.infoÜberRemoteDesktopManagerToolStripMenuItem_Click);
             // 
             // splitter1
             // 
@@ -138,6 +130,15 @@
             // 
             this.contextstriptabcontrol.Name = "contextstriptabcontrol";
             this.contextstriptabcontrol.Size = new System.Drawing.Size(61, 4);
+            // 
+            // rdplist
+            // 
+            this.rdplist.Dock = System.Windows.Forms.DockStyle.Left;
+            this.rdplist.Location = new System.Drawing.Point(0, 24);
+            this.rdplist.Name = "rdplist";
+            this.rdplist.Size = new System.Drawing.Size(232, 606);
+            this.rdplist.TabIndex = 1;
+            this.rdplist.RemoteDesktopItemClicked += new RemoteDesktopManager.RemoteDesktopItemEventHandler(this.rdplist_RemoteDesktopItemClicked);
             // 
             // frmmain
             // 
