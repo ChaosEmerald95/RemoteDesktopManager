@@ -66,18 +66,6 @@ namespace RemoteDesktopManager.Components
 
             //jetzt Element anzeigen
             rdpView.Show();
-
-            //ContextMenuStrip erstellen und konfigurieren
-            ContextMenuStrip strip = new ContextMenuStrip();
-            ToolStripItem tsitem1 = new ToolStripMenuItem("Schliessen");
-            ToolStripItem tsitem2 = new ToolStripMenuItem("Abdocken");
-            tsitem1.Click += ContextMenuClose_Clicked;
-            tsitem2.Click += ContextMenuUndock_Clicked;
-            strip.Items.Add(tsitem1);
-            strip.Items.Add(tsitem2);
-
-            //ContextMenuStrip der TabPage hinzufügen
-            ContextMenuStrip = strip;
         }
 
         /// <summary>
@@ -100,10 +88,9 @@ namespace RemoteDesktopManager.Components
         }
 
         /// <summary>
-        /// Event-Methode:
         /// Dockt das Fenster aus der TabPage
         /// </summary>
-        private void ContextMenuUndock_Clicked(object sender, EventArgs e)
+        internal void RemoteDesktopWindowUndock()
         {
             //Fenster abdocken
             rdpView.Dock = DockStyle.None;

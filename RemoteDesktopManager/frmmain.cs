@@ -75,8 +75,11 @@ namespace RemoteDesktopManager
                     {
                         ContextMenu cm = new ContextMenu();
                         MenuItem mi = new MenuItem("Schliessen");
+                        MenuItem mi2 = new MenuItem("Abdocken");
                         mi.Click += ContextMenuClose_Clicked;
+                        mi2.Click += ContextMenuUndock_Clicked;
                         cm.MenuItems.Add(mi);
+                        cm.MenuItems.Add(mi2);
                         cm.Show(tabc, e.Location);
                         break;
                     }
@@ -92,8 +95,23 @@ namespace RemoteDesktopManager
         {
             //Verbindung schliessen
             RemoteDesktopTabPage t = (RemoteDesktopTabPage)tabc.SelectedTab;
-            RemoteDesktopTabPageView r = (RemoteDesktopTabPageView)t.Controls[0];
-            r.Disconnect();
+            if (t.Controls.Count > 0) //Nur RemoteDesktopWindow schliessen, wenn noch mindestens 1 Control enthalten ist
+            {
+                RemoteDesktopTabPageView r = (RemoteDesktopTabPageView)t.Controls[0];
+                r.Disconnect();
+            }
+            if (!t.IsDisposed) t.Dispose(); //Wenn es noch nicht disposed wurde, dies hier tun
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Die TabPage soll das Fenster abdocken (und sich selbst disposen)
+        /// </summary>
+        private void ContextMenuUndock_Clicked(object sender, EventArgs e)
+        {
+            //Verbindung schliessen
+            RemoteDesktopTabPage t = (RemoteDesktopTabPage)tabc.SelectedTab;
+            t.RemoteDesktopWindowUndock(); //Abdocken
         }
 
         /// <summary>
