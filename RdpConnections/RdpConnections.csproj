@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>RemoteDesktopManager.RdpConnections</RootNamespace>
+    <Company />
+    <Authors>ChaosEmerald95</Authors>
+    <Product>RemoteDesktopManager</Product>
+    <Copyright>©ChaosEmerald95  2018</Copyright>
+    <PackageId>RemoteDesktopManager.RdpConnections</PackageId>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <FileVersion>1.0.0.1</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite.Core" Version="2.0.0" />
+    <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="1.1.9" />
+    <PackageReference Include="SQLitePCLRaw.core" Version="1.1.9" />
+  </ItemGroup>
+
+</Project>

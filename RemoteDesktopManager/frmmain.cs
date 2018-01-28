@@ -1,9 +1,11 @@
 ﻿using RemoteDesktopManager.Components;
+using RemoteDesktopManager.RdpConnections;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,12 +15,36 @@ namespace RemoteDesktopManager
 {
     public partial class frmmain : Form
     {
+        //Variablen
+        private string m_filepath = Directory.GetCurrentDirectory() + @"\rdpconnections.sqlite";
+        private RemoteDesktopList rdplist = null; //Das Control für die RemoteDesktop-Verbindungsliste
+
         /// <summary>
         /// Erstellt eine neue Instanz von frmabout
         /// </summary>
         public frmmain()
         {
             InitializeComponent();
+
+            //Initialisierung von SQLite
+            SQLitePCL.Batteries_V2.Init();
+
+            //SQLite-Datenbank vorbereiten, sollte die noch nicht existieren
+            if (!File.Exists(m_filepath)) SqliteConnectionManager.CreateSqliteDatabase(m_filepath);
+
+            //Testen der Verbindung. Wenn es fehlschlägt, dann wurde kein passwort vergeben
+            /*if (!SqliteConnectionManager.TestConnection(m_filepath))
+            {
+                //Es wurde kein Passwort vergeben
+                //Programm hier erstmal beenden
+                Environment.Exit(0);
+            }*/
+
+            //Rdp-List neu einbinden
+            rdplist = new RemoteDesktopList(m_filepath);
+            rdplist.Dock = DockStyle.Fill;
+            rdplist.RemoteDesktopItemClicked += rdplist_RemoteDesktopItemClicked;
+            panelsidemenu.Controls.Add(rdplist);
         }
 
         /// <summary>
@@ -42,16 +68,6 @@ namespace RemoteDesktopManager
             frm.ShowDialog();
             if (frm.RemoteDesktopData != null) //Wenn es nicht null ist, dann soll die Verbindung geöffnet werden
                 OpenRdpConnection(frm.RemoteDesktopData);
-        }
-
-        /// <summary>
-        /// Event-Methode:
-        /// Speichert die RemoteDesktop-Verbindungen in eine Datei
-        /// </summary>
-        private void tsmenuitemstoreconnections_Click(object sender, EventArgs e)
-        {
-            //Liste den Befehl erteilen, die Einträge zu speichern
-            rdplist.SaveRemoteDesktopConnections();
         }
 
         /// <summary>

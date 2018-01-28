@@ -73,6 +73,16 @@ namespace RemoteDesktopManager.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_folder_win10 {
+            get {
+                object obj = ResourceManager.GetObject("icon_folder_win10", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_fullscreen {
             get {
                 object obj = ResourceManager.GetObject("icon_fullscreen", resourceCulture);
