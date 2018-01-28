@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Data;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace RemoteDesktopManager.RdpConnections
@@ -21,7 +22,6 @@ namespace RemoteDesktopManager.RdpConnections
         {
             if (connectionString == null) throw new ArgumentNullException(nameof(connectionString)); //Wenn null, dann soll eine Exception ausgegeben werden
             m_connection = new SqliteConnection(connectionString);
-
         }
 
         /// <summary>
@@ -47,12 +47,11 @@ namespace RemoteDesktopManager.RdpConnections
         /// <param name="password">Das Passwort für die Datenbankverbindung</param>
         /// <param name="table">Die Tabelle, wo der Test gemacht werden soll</param>
         /// <returns></returns>
-        public static bool TestConnection(string filePath, string table, string password = "")
+        public static bool TestConnection(string filePath, string password = "")
         {
             //Argumente prüfen
             if (filePath == null) throw new ArgumentNullException(nameof(filePath));
             if (password == null) throw new ArgumentNullException(nameof(password));
-            if (table == null) throw new ArgumentNullException(nameof(table));
 
             //ConnectionStríng erstellen
             string t = CreateConnectionString(filePath, password);
@@ -64,7 +63,7 @@ namespace RemoteDesktopManager.RdpConnections
 
                 //Command testen
                 SqliteCommand command = conn.CreateCommand();
-                command.CommandText = string.Format("select * from {0}", table);
+                command.CommandText = string.Format("select * from tblConnectionStructure;");
                 command.ExecuteNonQuery();
                 command.ExecuteScalar();
                 if (conn.State == ConnectionState.Open)
@@ -74,6 +73,42 @@ namespace RemoteDesktopManager.RdpConnections
 
             }
             catch { return false; }
+        }
+
+        /// <summary>
+        /// Erstellt eine neue SQLite-Datenbank mit der Tabelle
+        /// </summary>
+        /// <param name="filePath">Der Pfad, wo die SQLite-Datenbank gespeichert werden soll</param>
+        /// <param name="password">Da sPasswort der Datei</param>
+        public static void CreateSqliteDatabase(string filePath, string password = "")
+        {
+            //Um eine leere Datenbank zu erstellen, muss man nur eine leere Datei erstellen. 
+            //Quelle: https://stackoverflow.com/a/46084676
+            FileStream fs = File.Create(filePath);
+            fs.Close();
+
+            //Die Datenbank-Verbindung öffnen
+            SqliteConnection t_con = new SqliteConnection(CreateConnectionString(filePath));
+            t_con.Open();
+
+            //Wenn ein Passwort vergeben wurde, das auch ändern
+            //Quelle: https://stackoverflow.com/a/38368369
+            if (password != "")
+            {
+                using (var command = t_con.CreateCommand())
+                {
+                    command.CommandText = $"PRAGMA key='" + password + "';";
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            //Tabelle erstellen
+            using (var command = t_con.CreateCommand())
+            {
+                command.CommandText = "create table tblConnectionStructure (Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ParentId INTEGER, Name TEXT, Type INTEGER, Hostname TEXT, Username TEXT, Password TEXT, Bemerkung TEXT);";
+                command.ExecuteNonQuery();
+            }
+            t_con.Close();
         }
 
         /// <summary>

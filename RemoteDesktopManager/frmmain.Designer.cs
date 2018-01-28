@@ -38,10 +38,10 @@
             this.tsmenuitemcloseapplication = new System.Windows.Forms.ToolStripMenuItem();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.infoÜberRemoteDesktopManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextstriptabcontrol = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.panelsidemenu = new System.Windows.Forms.Panel();
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.tabc = new System.Windows.Forms.TabControl();
-            this.contextstriptabcontrol = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.rdplist = new RemoteDesktopManager.RemoteDesktopList();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,9 +107,23 @@
             this.infoÜberRemoteDesktopManagerToolStripMenuItem.Text = "Info über RemoteDesktop-Manager";
             this.infoÜberRemoteDesktopManagerToolStripMenuItem.Click += new System.EventHandler(this.infoÜberRemoteDesktopManagerToolStripMenuItem_Click);
             // 
+            // contextstriptabcontrol
+            // 
+            this.contextstriptabcontrol.Name = "contextstriptabcontrol";
+            this.contextstriptabcontrol.Size = new System.Drawing.Size(61, 4);
+            // 
+            // panelsidemenu
+            // 
+            this.panelsidemenu.BackColor = System.Drawing.SystemColors.AppWorkspace;
+            this.panelsidemenu.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panelsidemenu.Location = new System.Drawing.Point(0, 24);
+            this.panelsidemenu.Name = "panelsidemenu";
+            this.panelsidemenu.Size = new System.Drawing.Size(200, 606);
+            this.panelsidemenu.TabIndex = 1;
+            // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(232, 24);
+            this.splitter1.Location = new System.Drawing.Point(200, 24);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(3, 606);
             this.splitter1.TabIndex = 2;
@@ -118,27 +132,11 @@
             // tabc
             // 
             this.tabc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabc.Location = new System.Drawing.Point(235, 24);
+            this.tabc.Location = new System.Drawing.Point(203, 24);
             this.tabc.Name = "tabc";
             this.tabc.SelectedIndex = 0;
-            this.tabc.Size = new System.Drawing.Size(1039, 606);
-            this.tabc.TabIndex = 3;
-            this.tabc.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.tabc_ControlRemoved);
-            this.tabc.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabc_MouseClick);
-            // 
-            // contextstriptabcontrol
-            // 
-            this.contextstriptabcontrol.Name = "contextstriptabcontrol";
-            this.contextstriptabcontrol.Size = new System.Drawing.Size(61, 4);
-            // 
-            // rdplist
-            // 
-            this.rdplist.Dock = System.Windows.Forms.DockStyle.Left;
-            this.rdplist.Location = new System.Drawing.Point(0, 24);
-            this.rdplist.Name = "rdplist";
-            this.rdplist.Size = new System.Drawing.Size(232, 606);
-            this.rdplist.TabIndex = 1;
-            this.rdplist.RemoteDesktopItemClicked += new RemoteDesktopManager.RemoteDesktopItemEventHandler(this.rdplist_RemoteDesktopItemClicked);
+            this.tabc.Size = new System.Drawing.Size(1071, 606);
+            this.tabc.TabIndex = 4;
             // 
             // frmmain
             // 
@@ -148,7 +146,7 @@
             this.ClientSize = new System.Drawing.Size(1274, 630);
             this.Controls.Add(this.tabc);
             this.Controls.Add(this.splitter1);
-            this.Controls.Add(this.rdplist);
+            this.Controls.Add(this.panelsidemenu);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
@@ -165,17 +163,17 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private RemoteDesktopList rdplist;
         private System.Windows.Forms.ToolStripMenuItem programmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmenuitemdirectconnection;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsmenuitemcloseapplication;
         private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoÜberRemoteDesktopManagerToolStripMenuItem;
-        private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.TabControl tabc;
         private System.Windows.Forms.ToolStripMenuItem tsmenuitemstoreconnections;
         private System.Windows.Forms.ContextMenuStrip contextstriptabcontrol;
+        private System.Windows.Forms.Panel panelsidemenu;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.TabControl tabc;
     }
 }
 

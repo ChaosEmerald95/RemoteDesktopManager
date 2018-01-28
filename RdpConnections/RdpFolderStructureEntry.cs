@@ -33,8 +33,8 @@ namespace RemoteDesktopManager.RdpConnections
         /// </summary>
         public int ParentId
         {
-            get => m_id;
-            set => m_id = value;
+            get => m_parentId;
+            set => m_parentId = value;
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace RemoteDesktopManager.RdpConnections
         /// </summary>
         public int Type
         {
-            get => m_type
+            get => m_type;
             set
             {
                 if (value < 0 || value > 1)

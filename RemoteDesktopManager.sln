@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.27130.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteDesktopManager", "RemoteDesktopManager\RemoteDesktopManager.csproj", "{2015EE00-5823-4AA4-9447-5C295B8A5286}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RdpConnections", "RdpConnections\RdpConnections.csproj", "{801DBAEB-AA6C-4CB1-870F-746EBAEB445B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,8 +17,15 @@ Global
 		{2015EE00-5823-4AA4-9447-5C295B8A5286}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2015EE00-5823-4AA4-9447-5C295B8A5286}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2015EE00-5823-4AA4-9447-5C295B8A5286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{801DBAEB-AA6C-4CB1-870F-746EBAEB445B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{801DBAEB-AA6C-4CB1-870F-746EBAEB445B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{801DBAEB-AA6C-4CB1-870F-746EBAEB445B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{801DBAEB-AA6C-4CB1-870F-746EBAEB445B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6EBAE024-FFD1-452B-A0DD-03F8FF85A518}
 	EndGlobalSection
 EndGlobal

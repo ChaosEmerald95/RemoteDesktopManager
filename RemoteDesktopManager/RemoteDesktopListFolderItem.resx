@@ -117,38 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="icon_rdpquality_level1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_rdpquality_level1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="thumb__emote__esktop__onnection" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\thumb__emote__esktop__onnection.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ButtonFace" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ButtonFace.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_rdpquality_level4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_rdpquality_level4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="img_remotedesktop_config" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\remote-desktop.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_rdpquality_level2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_rdpquality_level2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_rdpquality_level3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_rdpquality_level3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_rdpquality_level0" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_rdpquality_level0.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_hyperv_lockkeys" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_hyperv_lockkeys.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_fullscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_fullscreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_folder_win10" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icon_folder_win10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>
