@@ -160,6 +160,57 @@ namespace RemoteDesktopManager
         /// </summary>
         private void btnadd_Click(object sender, EventArgs e)
         {
+            //Dialog zur Auswahl einer Eintragsoption öffnen
+            dlgrdplistnewelement dlg = new dlgrdplistnewelement();
+            dlg.ShowDialog();
+            if (dlg.DialogResultId == 0) return; //wenn nichts ausgewählt wurde, hier beenden
+
+            //Anhand des Ergebnisses weiterarbeiten
+            if (dlg.DialogResultId == 1) //Ein neuer Ordner soll erstellt werden
+            {
+                frmenterfolderdata frm = new frmenterfolderdata();
+                frm.ShowDialog();
+                if (frm.FolderName != "") //Nur wenn es NICHT leer ist, darf die Methode fortgesetzt werden
+                {
+                    //RdpFolderStructureEntry erstellen
+                    RdpFolderStructureEntry re = new RdpFolderStructureEntry();
+                    re.ParentId = m_actualid;
+                    re.Caption = frm.FolderName;
+                    re.Type = 1; //Für Ordner
+
+                    //Eintrag speichern
+                    SqliteDataIO.UpdateEntry(m_conmanager, re, true);
+
+                    //Einträge neu laden
+                    LoadEntryList();
+                    RefreshList();
+                }
+            }
+            else if (dlg.DialogResultId == 2) //Ein neuer Eintrag soll erstellt werden
+            {
+                frmremotedesktopentry frm = new frmremotedesktopentry(); //Standard-Konstruktor benutzen
+                frm.ShowDialog();
+                if (frm.RemoteDesktopData != null) //Nur wenn es NICHT null ist, darf die Methode fortgesetzt werden
+                {
+                    //RdpFolderStructureRemoteEntry erstellen
+                    RdpFolderStructureRdpEntry re = new RdpFolderStructureRdpEntry();
+                    re.ParentId = m_actualid;
+                    re.Caption = frm.RemoteDesktopData.ConnectionName;
+                    re.Type = 0; //Für RDP-Einträge
+                    re.HostName = frm.RemoteDesktopData.IpAdresse;
+                    re.UserName = frm.RemoteDesktopData.Username;
+                    re.Password = frm.RemoteDesktopData.Password;
+
+                    //Eintrag speichern
+                    SqliteDataIO.UpdateEntry(m_conmanager, re, true);
+
+                    //Einträge neu laden
+                    LoadEntryList();
+                    RefreshList();
+                }
+            }
+
+            /*
             //Fenster zum Hinzufügen von neuen Einträgen aufrufen
             frmremotedesktopentry frm = new frmremotedesktopentry(); //Standard-Konstruktor benutzen
             frm.ShowDialog();
@@ -172,7 +223,7 @@ namespace RemoteDesktopManager
                 l.Show();
                 panellist.Controls.Add(l);
                 panellist.Controls.SetChildIndex(l, 0);
-            }
+            }*/
         }
 
         /// <summary>

@@ -67,7 +67,7 @@
             this.btnadd.Name = "btnadd";
             this.btnadd.Size = new System.Drawing.Size(259, 26);
             this.btnadd.TabIndex = 2;
-            this.btnadd.Text = "+ Neue Verbindung...";
+            this.btnadd.Text = "+ Neues Element";
             this.btnadd.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnadd.UseVisualStyleBackColor = false;
             this.btnadd.Click += new System.EventHandler(this.btnadd_Click);

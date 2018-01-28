@@ -75,7 +75,7 @@ namespace RemoteDesktopManager.RdpConnections
         /// </summary>
         /// <param name="entry">Der zu speichernde Eintrag</param>
         /// <param name="adding">Angabe, ob ein neuer hinzugefügt werden soll oder nicht</param>
-        public static void UpdateEntry(SqliteConnectionManager connectionManager, ref RdpFolderStructureEntry entry, bool adding = false)
+        public static void UpdateEntry(SqliteConnectionManager connectionManager, RdpFolderStructureEntry entry, bool adding = false)
         {
             //Prüfen, dass nix null ist
             if (connectionManager == null) throw new ArgumentNullException(nameof(connectionManager));
@@ -113,9 +113,9 @@ namespace RemoteDesktopManager.RdpConnections
             connectionManager.ExecuteSql(sqlc); //Befehl ausführen
 
             //Wenn es ein Add-Vorgang war, dann soll dem Eintrag noch die Id gegeben werden
-            if (adding)
+            /*if (adding)
             {
-                SqliteDataReader t_r = connectionManager.GetSqlResult("Select Max(Id) as MaxId from " + TABLE_CONNECTIONS);
+                /*SqliteDataReader t_r = connectionManager.GetSqlResult("Select Max(Id) as MaxId from " + TABLE_CONNECTIONS);
                 if (t_r.HasRows) //Nur wenn Zeilen vorhanden sind, bringt das ganze was
                 {
                     t_r.Read();
@@ -123,7 +123,7 @@ namespace RemoteDesktopManager.RdpConnections
                 }
                 else
                     entry.Id = -1; //Damit das Programm damit einen Fehler feststellt
-            }
+            }*/
         }
     }
 }
