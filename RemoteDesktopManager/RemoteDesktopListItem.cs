@@ -9,17 +9,30 @@ namespace RemoteDesktopManager
     public partial class RemoteDesktopListItem : UserControl
     {
         private RemoteDesktopData m_data; //Die Daten der RemoeDesktop-Verbindung
+        private int m_id = -1; //Die ID des Eintrags
+
+        //Events
+        public event RemoteDesktopItemRemoveEventHandler EntryRemove;
+        public event RemoteDesktopItemConnectionChangedEventHandler EntryChanged;
 
         /// <summary>
         /// Erstellt eine neue Instanz von RemoteDesktopListItem
         /// </summary>
         /// <param name="rdpData">Die Daten zur Remote-Desktop-Verbindung</param>
-        public RemoteDesktopListItem(RemoteDesktopData rdpData)
+        /// <param name="id">Die ID des Eintrags in der Datenbank</param>
+        public RemoteDesktopListItem(RemoteDesktopData rdpData, int id)
         {
             InitializeComponent();
             m_data = rdpData;
             lbconname.Text = rdpData.ConnectionName;
             lbip.Text = rdpData.IpAdresse;
+            m_id = id;
+
+            //Events anbinden
+            picimagerdp.DoubleClick += Redirect_DoubleClick;
+            lbconname.DoubleClick += Redirect_DoubleClick;
+            lbip.DoubleClick += Redirect_DoubleClick;
+            tsmenuitemconnect.DoubleClick += Redirect_DoubleClick;
         }
 
         /// <summary>
@@ -27,40 +40,17 @@ namespace RemoteDesktopManager
         /// </summary>
         public RemoteDesktopData RemoteDesktopData { get => m_data; }
 
-        #region DoubleClickRedirection
-        //Die Methoden dienen nur zur Weiterleitung des DoubleClick-Events, damit auch da
-        //das Event ausgelöst wird
-
-        private void picimagerdp_DoubleClick(object sender, System.EventArgs e)
-        {
-            //Event weitergeben
-            this.OnDoubleClick(e);
-        }
-
-        private void lbconname_DoubleClick(object sender, System.EventArgs e)
-        {
-            //Event weitergeben
-            this.OnDoubleClick(e);
-        }
-
-        private void lbip_DoubleClick(object sender, System.EventArgs e)
-        {
-            //Event weitergeben
-            this.OnDoubleClick(e);
-        }
-        #endregion
-
-        #region ContextMenuItems
         /// <summary>
         /// Event-Methode:
-        /// Verbindet mit dem Computer
+        /// Gibt dne DoubleClick weiter an das UserControl
         /// </summary>
-        private void tsmenuitemconnect_Click(object sender, System.EventArgs e)
+        private void Redirect_DoubleClick(object sender, System.EventArgs e)
         {
             //Event weitergeben
             this.OnDoubleClick(e);
         }
 
+        #region ContextMenuItems
         /// <summary>
         /// Event-Methode:
         /// Ermöglicht die Bearbeitung der Einstellungen
@@ -76,6 +66,9 @@ namespace RemoteDesktopManager
                 //Control-Texte anpassen
                 lbconname.Text = m_data.ConnectionName;
                 lbip.Text = m_data.IpAdresse;
+
+                //Event auslösen
+                EntryChanged(m_id, frm.RemoteDesktopData);
             }
         }
 
@@ -85,10 +78,10 @@ namespace RemoteDesktopManager
         /// </summary>
         private void tsmenuitemsdelete_Click(object sender, System.EventArgs e)
         {
-            //Bevor der Eintrag gelöscht wird (eigentlich wird der nur disposed, aber egal xD)
+            //Bevor der Eintrag gelöscht wird
             //muss der Benutzer den Löschvorgang bestätigen
-            if (MessageBox.Show("Soll die RemoteDesktop-Verbindung wirklich gelöscht werden?" + Environment.NewLine + Environment.NewLine + "Die Änderung wird erst durch die Speicherung der Einträge übernommen", "Hinweis", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                Dispose(); //Control disposen
+            if (MessageBox.Show("Soll die RemoteDesktop-Verbindung wirklich gelöscht werden?", "Hinweis", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                EntryRemove(m_id);
         }
         #endregion
     }

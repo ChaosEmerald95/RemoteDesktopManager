@@ -33,7 +33,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.programmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmenuitemdirectconnection = new System.Windows.Forms.ToolStripMenuItem();
-            this.tsmenuitemstoreconnections = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmenuitemcloseapplication = new System.Windows.Forms.ToolStripMenuItem();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,7 +59,6 @@
             // 
             this.programmToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmenuitemdirectconnection,
-            this.tsmenuitemstoreconnections,
             this.toolStripSeparator1,
             this.tsmenuitemcloseapplication});
             this.programmToolStripMenuItem.Name = "programmToolStripMenuItem";
@@ -70,26 +68,19 @@
             // tsmenuitemdirectconnection
             // 
             this.tsmenuitemdirectconnection.Name = "tsmenuitemdirectconnection";
-            this.tsmenuitemdirectconnection.Size = new System.Drawing.Size(202, 22);
+            this.tsmenuitemdirectconnection.Size = new System.Drawing.Size(170, 22);
             this.tsmenuitemdirectconnection.Text = "Direkt verbinden...";
             this.tsmenuitemdirectconnection.Click += new System.EventHandler(this.direktVerbindenToolStripMenuItem_Click);
-            // 
-            // tsmenuitemstoreconnections
-            // 
-            this.tsmenuitemstoreconnections.Name = "tsmenuitemstoreconnections";
-            this.tsmenuitemstoreconnections.Size = new System.Drawing.Size(202, 22);
-            this.tsmenuitemstoreconnections.Text = "Verbindungen speichern";
-            this.tsmenuitemstoreconnections.Click += new System.EventHandler(this.tsmenuitemstoreconnections_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
             // 
             // tsmenuitemcloseapplication
             // 
             this.tsmenuitemcloseapplication.Name = "tsmenuitemcloseapplication";
-            this.tsmenuitemcloseapplication.Size = new System.Drawing.Size(202, 22);
+            this.tsmenuitemcloseapplication.Size = new System.Drawing.Size(170, 22);
             this.tsmenuitemcloseapplication.Text = "Beenden";
             // 
             // hilfeToolStripMenuItem
@@ -169,7 +160,6 @@
         private System.Windows.Forms.ToolStripMenuItem tsmenuitemcloseapplication;
         private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem infoÜberRemoteDesktopManagerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem tsmenuitemstoreconnections;
         private System.Windows.Forms.ContextMenuStrip contextstriptabcontrol;
         private System.Windows.Forms.Panel panelsidemenu;
         private System.Windows.Forms.Splitter splitter1;

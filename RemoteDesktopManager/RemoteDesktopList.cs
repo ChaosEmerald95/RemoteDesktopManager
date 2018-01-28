@@ -13,6 +13,9 @@ using System.IO;
 namespace RemoteDesktopManager
 {
     public delegate void RemoteDesktopItemEventHandler(RemoteDesktopData data); //Der Delegate für das Event
+    public delegate void RemoteDesktopItemRemoveEventHandler(int id); //Der Delegate für das Event, wenn ein Eintrag gelöscht werden soll
+    public delegate void RemoteDesktopItemFolderChangedEventHandler(int id, string foldername);
+    public delegate void RemoteDesktopItemConnectionChangedEventHandler(int id, RemoteDesktopData rdpData);
 
     /// <summary>
     /// Zeigt die Kunden-Liste an
@@ -89,7 +92,12 @@ namespace RemoteDesktopManager
                         {
                             //Control erstellen und einbinden
                             RemoteDesktopListFolderItem l = new RemoteDesktopListFolderItem(rdp.Id, rdp.Caption);
-                            l.DoubleClick += RemoteDesktopFolderItem_Clicked; //Event anbinden
+                            
+                            //Events anbinden
+                            l.DoubleClick += RemoteDesktopFolderItem_Clicked;
+                            l.EntryRemove += RemoveEntry;
+                            l.EntryChanged += EntryChanged_Folder;
+
                             l.Dock = DockStyle.Top;
                             l.Show();
                             panellist.Controls.Add(l);
@@ -108,8 +116,13 @@ namespace RemoteDesktopManager
                             RemoteDesktopData r = new RemoteDesktopData(re.HostName, re.UserName, re.Password, re.Caption);
 
                             //Control erstellen und einbinden
-                            RemoteDesktopListItem l = new RemoteDesktopListItem(r);
-                            l.DoubleClick += RemoteDesktopItem_Clicked; //Event anbinden
+                            RemoteDesktopListItem l = new RemoteDesktopListItem(r, re.Id);
+
+                            //Events anbinden
+                            l.DoubleClick += RemoteDesktopItem_Clicked; 
+                            l.EntryRemove += RemoveEntry;
+                            l.EntryChanged += EntryChanged_Connection;
+
                             l.Dock = DockStyle.Top;
                             l.Show();
                             panellist.Controls.Add(l);
@@ -209,38 +222,53 @@ namespace RemoteDesktopManager
                     RefreshList();
                 }
             }
-
-            /*
-            //Fenster zum Hinzufügen von neuen Einträgen aufrufen
-            frmremotedesktopentry frm = new frmremotedesktopentry(); //Standard-Konstruktor benutzen
-            frm.ShowDialog();
-            if (frm.RemoteDesktopData != null) //Nur wenn es NICHT null ist, darf die Methode fortgesetzt werden
-            {
-                //Den Eintrag hinzufügen
-                RemoteDesktopListItem l = new RemoteDesktopListItem(frm.RemoteDesktopData);
-                l.DoubleClick += RemoteDesktopItem_Clicked; //Event anbinden
-                l.Dock = DockStyle.Top;
-                l.Show();
-                panellist.Controls.Add(l);
-                panellist.Controls.SetChildIndex(l, 0);
-            }*/
         }
 
         /// <summary>
-        /// Speichert die RemoteDesktop-Verbindungen in die Datei
+        /// Event-Methode:
+        /// Entfernt einen Eintrag aus der Datenbank
         /// </summary>
-        public void SaveRemoteDesktopConnections()
+        /// <param name="id">Die ID des Eintrags</param>
+        public void RemoveEntry(int id)
         {
-            /*//Liste erstellen
-            List<RemoteDesktopData> rdpData = new List<RemoteDesktopData>();
-            foreach (Control c in panellist.Controls)
-            {
-                RemoteDesktopListItem rdpLi = (RemoteDesktopListItem)c;
-                rdpData.Add(rdpLi.RemoteDesktopData);
-            }
+            //SQL-Befehl ausführen
+            m_conmanager.ExecuteSql("delete from tblConnectionStructure where Id = " + id.ToString() + ";");
 
-            //Liste speichern
-            ConnectionFileHandler.SaveConnections(m_filepath, rdpData);*/
+            //Einträge neu laden
+            LoadEntryList();
+            RefreshList();
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Ändert die Daten in der Datenbank
+        /// </summary>
+        /// <param name="id">Die ID des Eintrags</param>
+        /// <param name="folderName">Der Name des Ordners</param>
+        public void EntryChanged_Folder(int id, string folderName)
+        {
+            //SQL-Befehl ausführen
+            m_conmanager.ExecuteSql("update tblConnectiomnStructure set Name='" + folderName + "' where Id=" + id.ToString() + ";");
+
+            //Einträge neu laden
+            LoadEntryList();
+            RefreshList();
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Ändert die Daten in der Datenbank
+        /// </summary>
+        /// <param name="id">Die ID des Eintrags</param>
+        /// <param name="rdpData">Die RemtoeDesktop-Daten</param>
+        public void EntryChanged_Connection(int id, RemoteDesktopData rdpData)
+        {
+            //SQL-Befehl ausführen
+            m_conmanager.ExecuteSql("update tblConnectiomnStructure set Name='" + rdpData.ConnectionName + "', Hostname='" + rdpData.IpAdresse + "', Username='" + rdpData.Username + "', Password='" + rdpData.Password + "' where Id=" + id.ToString() + ";");
+
+            //Einträge neu laden
+            LoadEntryList();
+            RefreshList();
         }
     }
 }

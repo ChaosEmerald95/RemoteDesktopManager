@@ -33,10 +33,10 @@
             this.lbip = new System.Windows.Forms.Label();
             this.picimagerdp = new System.Windows.Forms.PictureBox();
             this.contextsingleconnection = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tsmenuitemconnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmenuitemeditsettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmenuitemsdelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsmenuitemconnect = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.picimagerdp)).BeginInit();
             this.contextsingleconnection.SuspendLayout();
             this.SuspendLayout();
@@ -45,26 +45,24 @@
             // 
             this.lbconname.AutoSize = true;
             this.lbconname.BackColor = System.Drawing.Color.Transparent;
-            this.lbconname.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbconname.Location = new System.Drawing.Point(70, 11);
+            this.lbconname.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbconname.Location = new System.Drawing.Point(69, 8);
             this.lbconname.Name = "lbconname";
-            this.lbconname.Size = new System.Drawing.Size(84, 16);
+            this.lbconname.Size = new System.Drawing.Size(86, 20);
             this.lbconname.TabIndex = 0;
             this.lbconname.Text = "lbconname";
-            this.lbconname.DoubleClick += new System.EventHandler(this.lbconname_DoubleClick);
             // 
             // lbip
             // 
             this.lbip.AutoSize = true;
             this.lbip.BackColor = System.Drawing.Color.Transparent;
-            this.lbip.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbip.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbip.ForeColor = System.Drawing.Color.Gray;
             this.lbip.Location = new System.Drawing.Point(70, 30);
             this.lbip.Name = "lbip";
-            this.lbip.Size = new System.Drawing.Size(23, 13);
+            this.lbip.Size = new System.Drawing.Size(27, 13);
             this.lbip.TabIndex = 0;
             this.lbip.Text = "lbip";
-            this.lbip.DoubleClick += new System.EventHandler(this.lbip_DoubleClick);
             // 
             // picimagerdp
             // 
@@ -75,7 +73,6 @@
             this.picimagerdp.Size = new System.Drawing.Size(48, 48);
             this.picimagerdp.TabIndex = 1;
             this.picimagerdp.TabStop = false;
-            this.picimagerdp.DoubleClick += new System.EventHandler(this.picimagerdp_DoubleClick);
             // 
             // contextsingleconnection
             // 
@@ -85,7 +82,18 @@
             this.tsmenuitemeditsettings,
             this.tsmenuitemsdelete});
             this.contextsingleconnection.Name = "contextsingleconnection";
-            this.contextsingleconnection.Size = new System.Drawing.Size(131, 76);
+            this.contextsingleconnection.Size = new System.Drawing.Size(153, 98);
+            // 
+            // tsmenuitemconnect
+            // 
+            this.tsmenuitemconnect.Name = "tsmenuitemconnect";
+            this.tsmenuitemconnect.Size = new System.Drawing.Size(152, 22);
+            this.tsmenuitemconnect.Text = "Verbinden";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // tsmenuitemeditsettings
             // 
@@ -98,20 +106,8 @@
             // 
             this.tsmenuitemsdelete.Name = "tsmenuitemsdelete";
             this.tsmenuitemsdelete.Size = new System.Drawing.Size(152, 22);
-            this.tsmenuitemsdelete.Text = "Lösschen";
+            this.tsmenuitemsdelete.Text = "Löschen";
             this.tsmenuitemsdelete.Click += new System.EventHandler(this.tsmenuitemsdelete_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
-            // 
-            // tsmenuitemconnect
-            // 
-            this.tsmenuitemconnect.Name = "tsmenuitemconnect";
-            this.tsmenuitemconnect.Size = new System.Drawing.Size(152, 22);
-            this.tsmenuitemconnect.Text = "Verbinden";
-            this.tsmenuitemconnect.Click += new System.EventHandler(this.tsmenuitemconnect_Click);
             // 
             // RemoteDesktopListItem
             // 

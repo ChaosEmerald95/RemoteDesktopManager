@@ -72,16 +72,6 @@ namespace RemoteDesktopManager
 
         /// <summary>
         /// Event-Methode:
-        /// Speichert die RemoteDesktop-Verbindungen in eine Datei
-        /// </summary>
-        private void tsmenuitemstoreconnections_Click(object sender, EventArgs e)
-        {
-            //Liste den Befehl erteilen, die Einträge zu speichern
-            rdplist.SaveRemoteDesktopConnections();
-        }
-
-        /// <summary>
-        /// Event-Methode:
         /// Öffnet eine RemoteDesktop-Verbindung
         /// </summary>
         private void rdplist_RemoteDesktopItemClicked(RemoteDesktopData data)
