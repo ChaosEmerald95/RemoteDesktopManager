@@ -26,7 +26,7 @@ namespace RemoteDesktopManager
             lbcopyright.Text = fvi.LegalCopyright;
 
             LinkLabel.Link link = new LinkLabel.Link();
-            link.LinkData = "https://github.com/chaosemerald95";
+            link.LinkData = "https://github.com/ChaosEmerald95/RemoteDesktopManager";
             lblinksrccode.Links.Add(link);
         }
 

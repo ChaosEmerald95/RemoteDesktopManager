@@ -65,19 +65,19 @@
             this.tsmenuitemeditsettings,
             this.tsmenuitemsdelete});
             this.contextsingleconnection.Name = "contextsingleconnection";
-            this.contextsingleconnection.Size = new System.Drawing.Size(153, 70);
+            this.contextsingleconnection.Size = new System.Drawing.Size(131, 48);
             // 
             // tsmenuitemeditsettings
             // 
             this.tsmenuitemeditsettings.Name = "tsmenuitemeditsettings";
-            this.tsmenuitemeditsettings.Size = new System.Drawing.Size(152, 22);
+            this.tsmenuitemeditsettings.Size = new System.Drawing.Size(130, 22);
             this.tsmenuitemeditsettings.Text = "Bearbeiten";
             this.tsmenuitemeditsettings.Click += new System.EventHandler(this.tsmenuitemeditsettings_Click);
             // 
             // tsmenuitemsdelete
             // 
             this.tsmenuitemsdelete.Name = "tsmenuitemsdelete";
-            this.tsmenuitemsdelete.Size = new System.Drawing.Size(152, 22);
+            this.tsmenuitemsdelete.Size = new System.Drawing.Size(130, 22);
             this.tsmenuitemsdelete.Text = "Löschen";
             this.tsmenuitemsdelete.Click += new System.EventHandler(this.tsmenuitemsdelete_Click);
             // 
@@ -86,11 +86,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ContextMenuStrip = this.contextsingleconnection;
             this.Controls.Add(this.picimagerdp);
             this.Controls.Add(this.lbfoldername);
             this.Name = "RemoteDesktopListFolderItem";
-            this.Size = new System.Drawing.Size(362, 55);
+            this.Size = new System.Drawing.Size(360, 53);
             ((System.ComponentModel.ISupportInitialize)(this.picimagerdp)).EndInit();
             this.contextsingleconnection.ResumeLayout(false);
             this.ResumeLayout(false);
