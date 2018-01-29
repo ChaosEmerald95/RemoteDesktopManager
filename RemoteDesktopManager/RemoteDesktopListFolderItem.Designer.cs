@@ -43,7 +43,7 @@
             this.lbfoldername.AutoSize = true;
             this.lbfoldername.BackColor = System.Drawing.Color.Transparent;
             this.lbfoldername.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbfoldername.Location = new System.Drawing.Point(65, 17);
+            this.lbfoldername.Location = new System.Drawing.Point(69, 16);
             this.lbfoldername.Name = "lbfoldername";
             this.lbfoldername.Size = new System.Drawing.Size(103, 20);
             this.lbfoldername.TabIndex = 3;
@@ -53,7 +53,7 @@
             // 
             this.picimagerdp.BackgroundImage = global::RemoteDesktopManager.Properties.Resources.icon_folder_win10;
             this.picimagerdp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picimagerdp.Location = new System.Drawing.Point(11, 3);
+            this.picimagerdp.Location = new System.Drawing.Point(8, 1);
             this.picimagerdp.Name = "picimagerdp";
             this.picimagerdp.Size = new System.Drawing.Size(48, 48);
             this.picimagerdp.TabIndex = 4;

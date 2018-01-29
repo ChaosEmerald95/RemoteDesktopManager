@@ -34,6 +34,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnreload = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnnavigateup = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -75,6 +76,7 @@
             // panel1
             // 
             this.panel1.BackgroundImage = global::RemoteDesktopManager.Properties.Resources.ButtonFace;
+            this.panel1.Controls.Add(this.btnnavigateup);
             this.panel1.Controls.Add(this.btnreload);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -85,14 +87,14 @@
             // 
             // btnreload
             // 
-            this.btnreload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnreload.BackColor = System.Drawing.Color.Transparent;
+            this.btnreload.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnreload.FlatAppearance.BorderSize = 0;
             this.btnreload.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnreload.Font = new System.Drawing.Font("MS Outlook", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(2)));
-            this.btnreload.Location = new System.Drawing.Point(229, 3);
+            this.btnreload.Location = new System.Drawing.Point(233, 0);
             this.btnreload.Name = "btnreload";
-            this.btnreload.Size = new System.Drawing.Size(29, 23);
+            this.btnreload.Size = new System.Drawing.Size(29, 27);
             this.btnreload.TabIndex = 1;
             this.btnreload.Text = "C";
             this.btnreload.UseVisualStyleBackColor = false;
@@ -109,6 +111,21 @@
             this.label1.Size = new System.Drawing.Size(104, 16);
             this.label1.TabIndex = 0;
             this.label1.Text = "Verbindungen";
+            // 
+            // btnnavigateup
+            // 
+            this.btnnavigateup.BackColor = System.Drawing.Color.Transparent;
+            this.btnnavigateup.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnnavigateup.FlatAppearance.BorderSize = 0;
+            this.btnnavigateup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnnavigateup.Font = new System.Drawing.Font("Segoe MDL2 Assets", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnnavigateup.Location = new System.Drawing.Point(204, 0);
+            this.btnnavigateup.Name = "btnnavigateup";
+            this.btnnavigateup.Size = new System.Drawing.Size(29, 27);
+            this.btnnavigateup.TabIndex = 2;
+            this.btnnavigateup.Text = "";
+            this.btnnavigateup.UseVisualStyleBackColor = false;
+            this.btnnavigateup.Click += new System.EventHandler(this.btnnavigateup_Click);
             // 
             // RemoteDesktopList
             // 
@@ -134,5 +151,6 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnadd;
         private System.Windows.Forms.Panel panellist;
+        private System.Windows.Forms.Button btnnavigateup;
     }
 }

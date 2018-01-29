@@ -1,14 +1,7 @@
 ﻿using RemoteDesktopManager.RdpConnections;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
 
 namespace RemoteDesktopManager
 {
@@ -26,6 +19,7 @@ namespace RemoteDesktopManager
         private SqliteConnectionManager m_conmanager = null; //Der ConnectionManager
         private List<RdpFolderStructureEntry> m_entries = null; //Speichert die Liste mit den Einträgen
         private int m_actualid = -1; //Die aktuelle Id für die Anzeige der Verbindungen und Ordner
+        private int m_parentid = -1; //Die Id des Parents für das Zurück-Navigieren
 
         //Events
         public event RemoteDesktopItemEventHandler RemoteDesktopItemClicked; //Das Event für den Delegate
@@ -52,6 +46,7 @@ namespace RemoteDesktopManager
             //Liste laden
             LoadEntryList();
             m_actualid = -1;
+            btnnavigateup.Enabled = false; //Am Anfang muss es false sein
             RefreshList();
         }
 
@@ -141,6 +136,7 @@ namespace RemoteDesktopManager
         {
             //Wenn auf einen Ordner ein Doppelklick gemacht wird, dann soll m_actualid die ID des Ordners bekommen und dann die Liste neu geladen werden
             m_actualid = ((RemoteDesktopListFolderItem)sender).FolderId;
+            if (m_actualid != -1) btnnavigateup.Enabled = true; //Wenn die neue Ebene NICHT -1 ist, den Navigationsbutton aktivieren
             RefreshList();
         }
 
@@ -164,6 +160,7 @@ namespace RemoteDesktopManager
             //Verbindungen laden (sofern welche vorhanden sind)
             LoadEntryList();
             m_actualid = -1;
+            btnnavigateup.Enabled = false; 
             RefreshList();
         }
 
@@ -268,6 +265,39 @@ namespace RemoteDesktopManager
 
             //Einträge neu laden
             LoadEntryList();
+            RefreshList();
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Navigiert eine Ebene nach oben
+        /// </summary>
+        private void btnnavigateup_Click(object sender, EventArgs e)
+        {
+            //ID überschreiben
+            m_actualid = m_parentid;
+
+            //Wenn die neue Ebene -1 ist, den Navigationsbutton deaktivieren
+            if (m_actualid == -1) btnnavigateup.Enabled = false; 
+
+            //Wenn die neue Ebene nicht -1 ist, dann soll die Parent-ID ermittelt werden
+            if (m_actualid != -1)
+            {
+                //Daten werden geladen
+                m_entries = SqliteDataIO.GetEntries(m_conmanager);
+                foreach (RdpFolderStructureEntry rdp in m_entries)
+                {
+                    //Der Typ muss 1 sein und die Id die aktuelle Id des Controls
+                    if (rdp.Type == 1 && rdp.Id == m_actualid)
+                    {
+                        //ParentId speichern
+                        m_parentid = rdp.ParentId;
+                        break;
+                    }
+                }
+            }
+
+            //Daten laden
             RefreshList();
         }
     }

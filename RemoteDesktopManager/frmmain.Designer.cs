@@ -109,12 +109,12 @@
             this.panelsidemenu.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelsidemenu.Location = new System.Drawing.Point(0, 24);
             this.panelsidemenu.Name = "panelsidemenu";
-            this.panelsidemenu.Size = new System.Drawing.Size(200, 606);
+            this.panelsidemenu.Size = new System.Drawing.Size(215, 606);
             this.panelsidemenu.TabIndex = 1;
             // 
             // splitter1
             // 
-            this.splitter1.Location = new System.Drawing.Point(200, 24);
+            this.splitter1.Location = new System.Drawing.Point(215, 24);
             this.splitter1.Name = "splitter1";
             this.splitter1.Size = new System.Drawing.Size(3, 606);
             this.splitter1.TabIndex = 2;
@@ -123,10 +123,10 @@
             // tabc
             // 
             this.tabc.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabc.Location = new System.Drawing.Point(203, 24);
+            this.tabc.Location = new System.Drawing.Point(218, 24);
             this.tabc.Name = "tabc";
             this.tabc.SelectedIndex = 0;
-            this.tabc.Size = new System.Drawing.Size(1071, 606);
+            this.tabc.Size = new System.Drawing.Size(1056, 606);
             this.tabc.TabIndex = 4;
             this.tabc.ControlRemoved += new System.Windows.Forms.ControlEventHandler(this.tabc_ControlRemoved);
             this.tabc.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabc_MouseClick);
