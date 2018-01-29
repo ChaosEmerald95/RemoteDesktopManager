@@ -49,6 +49,7 @@
             this.lblinksrccode.TabIndex = 8;
             this.lblinksrccode.TabStop = true;
             this.lblinksrccode.Text = "Source Code";
+            this.lblinksrccode.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.lblinksrccode_LinkClicked);
             // 
             // lbcopyright
             // 

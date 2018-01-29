@@ -152,5 +152,14 @@ namespace RemoteDesktopManager
             frmabout frm = new frmabout();
             frm.ShowDialog();
         }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Beendet die Anwendung
+        /// </summary>
+        private void tsmenuitemcloseapplication_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0); //Beendet die Anwendung mit ExitCode 0
+        }
     }
 }

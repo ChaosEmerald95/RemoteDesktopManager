@@ -82,6 +82,7 @@
             this.tsmenuitemcloseapplication.Name = "tsmenuitemcloseapplication";
             this.tsmenuitemcloseapplication.Size = new System.Drawing.Size(170, 22);
             this.tsmenuitemcloseapplication.Text = "Beenden";
+            this.tsmenuitemcloseapplication.Click += new System.EventHandler(this.tsmenuitemcloseapplication_Click);
             // 
             // hilfeToolStripMenuItem
             // 

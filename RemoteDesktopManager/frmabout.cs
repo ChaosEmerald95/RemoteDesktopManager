@@ -10,6 +10,8 @@ namespace RemoteDesktopManager
     /// </summary>
     public partial class frmabout : Form
     {
+        private const string url_sourcecode = "https://github.com/ChaosEmerald95/RemoteDesktopManager";
+
         /// <summary>
         /// Erstellt eine neue Instanz von frmabout
         /// </summary>
@@ -24,10 +26,6 @@ namespace RemoteDesktopManager
             lbversionnumber.Text = fvi.ProductMajorPart + "." + fvi.ProductMinorPart + "." + fvi.ProductBuildPart + " Build " + fvi.ProductPrivatePart;
             lbbuild.Text = RetrieveLinkerTimestamp(System.Reflection.Assembly.GetCallingAssembly().Location).ToString();
             lbcopyright.Text = fvi.LegalCopyright;
-
-            LinkLabel.Link link = new LinkLabel.Link();
-            link.LinkData = "https://github.com/ChaosEmerald95/RemoteDesktopManager";
-            lblinksrccode.Links.Add(link);
         }
 
         /// <summary>
@@ -77,6 +75,16 @@ namespace RemoteDesktopManager
             dt = dt.AddSeconds(secondsSince1970);
             dt = dt.ToLocalTime();
             return dt;
+        }
+
+        /// <summary>
+        /// Event-Methode:
+        /// Öffnet die URL im Browser
+        /// </summary>
+        private void lblinksrccode_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            //Einfach Prozess starten
+            System.Diagnostics.Process.Start(url_sourcecode);
         }
     }
 }
