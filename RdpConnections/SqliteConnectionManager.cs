@@ -51,7 +51,6 @@ namespace RemoteDesktopManager.RdpConnections
         {
             //Argumente prüfen
             if (filePath == null) throw new ArgumentNullException(nameof(filePath));
-            if (password == null) throw new ArgumentNullException(nameof(password));
 
             //ConnectionStríng erstellen
             string t = CreateConnectionString(filePath, password);
@@ -64,7 +63,6 @@ namespace RemoteDesktopManager.RdpConnections
                 //Command testen
                 SqliteCommand command = conn.CreateCommand();
                 command.CommandText = string.Format("select * from tblConnectionStructure;");
-                command.ExecuteNonQuery();
                 command.ExecuteScalar();
                 if (conn.State == ConnectionState.Open)
                     return true;

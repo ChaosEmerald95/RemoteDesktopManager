@@ -1,14 +1,8 @@
 ﻿using RemoteDesktopManager.Components;
 using RemoteDesktopManager.RdpConnections;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RemoteDesktopManager
@@ -33,12 +27,19 @@ namespace RemoteDesktopManager
             if (!File.Exists(m_filepath)) SqliteConnectionManager.CreateSqliteDatabase(m_filepath);
 
             //Testen der Verbindung. Wenn es fehlschlägt, dann wurde kein passwort vergeben
-            /*if (!SqliteConnectionManager.TestConnection(m_filepath))
+            if (!SqliteConnectionManager.TestConnection(m_filepath))
             {
-                //Es wurde kein Passwort vergeben
-                //Programm hier erstmal beenden
-                Environment.Exit(0);
-            }*/
+                //Fenster zur Passwort-Abfrage öffnen
+                frmsqlitepassword frm = new frmsqlitepassword(m_filepath);
+                frm.ShowDialog();
+                if (!frm.IsConnected) //Es hat nicht geklappt
+                {
+                    MessageBox.Show("Die Anmeldung konnte nicht erfolgreich abgeschlossen werden" + Environment.NewLine + Environment.NewLine + "Das Programm wird beendet", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    //Programm hier beenden
+                    Environment.Exit(0);
+                }
+            }
 
             //Rdp-List neu einbinden
             rdplist = new RemoteDesktopList(m_filepath);

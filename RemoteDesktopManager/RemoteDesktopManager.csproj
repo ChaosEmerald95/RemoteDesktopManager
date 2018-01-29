@@ -120,6 +120,12 @@
     <Compile Include="frmshowrdpqualitystate.Designer.cs">
       <DependentUpon>frmshowrdpqualitystate.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmsqlitepassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmsqlitepassword.Designer.cs">
+      <DependentUpon>frmsqlitepassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RdpLog.cs" />
@@ -171,6 +177,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmshowrdpqualitystate.resx">
       <DependentUpon>frmshowrdpqualitystate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmsqlitepassword.resx">
+      <DependentUpon>frmsqlitepassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
