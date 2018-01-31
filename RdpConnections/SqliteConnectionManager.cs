@@ -12,7 +12,7 @@ namespace RemoteDesktopManager.RdpConnections
     public class SqliteConnectionManager
     {
         private string m_connectionstring = ""; //Der Connection-String, der verwendet wird
-        private SqliteConnection m_connection = null; //Das Objekt für die Datenbank-Verbindung
+        private Microsoft.Data.Sqlite.SqliteConnection m_connection = null; //Das Objekt für die Datenbank-Verbindung
 
         /// <summary>
         /// Erstellt eine neue Instanz von SqliteConnectionManager
@@ -21,7 +21,7 @@ namespace RemoteDesktopManager.RdpConnections
         public SqliteConnectionManager(string connectionString)
         {
             if (connectionString == null) throw new ArgumentNullException(nameof(connectionString)); //Wenn null, dann soll eine Exception ausgegeben werden
-            m_connection = new SqliteConnection(connectionString);
+            m_connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString);
         }
 
         /// <summary>
@@ -34,9 +34,9 @@ namespace RemoteDesktopManager.RdpConnections
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static string CreateConnectionString(string filePath, string password = "")
         {
-            string t = "Data Source=" + filePath + ";";
+            string t = "Data Source=" + filePath + "";
             if (password != "")
-                t += "; Password=" + password + ";";
+                t += "; Password=" + password;
             return t;
         }
 
@@ -57,11 +57,11 @@ namespace RemoteDesktopManager.RdpConnections
             try
             {
                 //Verbindung herstellen
-                SqliteConnection conn = new SqliteConnection(t);
+                Microsoft.Data.Sqlite.SqliteConnection conn = new Microsoft.Data.Sqlite.SqliteConnection(t);
                 conn.Open();
 
                 //Command testen
-                SqliteCommand command = conn.CreateCommand();
+                Microsoft.Data.Sqlite.SqliteCommand command = conn.CreateCommand();
                 command.CommandText = string.Format("select * from tblConnectionStructure;");
                 command.ExecuteScalar();
                 if (conn.State == ConnectionState.Open)
@@ -86,7 +86,7 @@ namespace RemoteDesktopManager.RdpConnections
             fs.Close();
 
             //Die Datenbank-Verbindung öffnen
-            SqliteConnection t_con = new SqliteConnection(CreateConnectionString(filePath));
+            Microsoft.Data.Sqlite.SqliteConnection t_con = new Microsoft.Data.Sqlite.SqliteConnection(CreateConnectionString(filePath));
             t_con.Open();
 
             //Wenn ein Passwort vergeben wurde, das auch ändern
@@ -168,7 +168,7 @@ namespace RemoteDesktopManager.RdpConnections
             if (sqlCommand == "") throw new ArgumentException("The Sql-Command can't be empty"); //Wenn es ein leerer Befehl ist, eine Exception zurückgeben
 
             //Befehl ausführen
-            SqliteCommand cmd = new SqliteCommand(sqlCommand, m_connection);
+            Microsoft.Data.Sqlite.SqliteCommand cmd = new Microsoft.Data.Sqlite.SqliteCommand(sqlCommand, m_connection);
             if (!IsConnected) OpenConnection(); //Wenn die Verbindung noch geschlossen ist, dann soll diese geöffnet werden
 
             //Befehl ausführen
@@ -189,7 +189,7 @@ namespace RemoteDesktopManager.RdpConnections
             if (sqlCommand == "") throw new ArgumentException("The Sql-Command can't be empty"); //Wenn es ein leerer Befehl ist, eine Exception zurückgeben
 
             //Befehl ausführen
-            SqliteCommand cmd = new SqliteCommand(sqlCommand, m_connection);
+            Microsoft.Data.Sqlite.SqliteCommand cmd = new Microsoft.Data.Sqlite.SqliteCommand(sqlCommand, m_connection);
             if (!IsConnected) OpenConnection(); //Wenn die Verbindung noch geschlossen ist, dann soll diese geöffnet werden
 
             //Befehl ausführen
@@ -197,7 +197,7 @@ namespace RemoteDesktopManager.RdpConnections
             cmd.CommandType = System.Data.CommandType.Text;
 
             //Daten erhalten und lesen
-            SqliteDataReader reader = cmd.ExecuteReader();
+            Microsoft.Data.Sqlite.SqliteDataReader reader = cmd.ExecuteReader();
 
             //Objekte vernichten und Verbindung schliessen
             CloseConnection();

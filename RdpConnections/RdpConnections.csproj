@@ -10,6 +10,7 @@
     <PackageId>RemoteDesktopManager.RdpConnections</PackageId>
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
     <FileVersion>1.0.0.1</FileVersion>
+    <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>

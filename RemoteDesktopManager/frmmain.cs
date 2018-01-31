@@ -29,16 +29,8 @@ namespace RemoteDesktopManager
             //Testen der Verbindung. Wenn es fehlschlägt, dann wurde kein passwort vergeben
             if (!SqliteConnectionManager.TestConnection(m_filepath))
             {
-                //Fenster zur Passwort-Abfrage öffnen
-                frmsqlitepassword frm = new frmsqlitepassword(m_filepath);
-                frm.ShowDialog();
-                if (!frm.IsConnected) //Es hat nicht geklappt
-                {
-                    MessageBox.Show("Die Anmeldung konnte nicht erfolgreich abgeschlossen werden" + Environment.NewLine + Environment.NewLine + "Das Programm wird beendet", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    //Programm hier beenden
-                    Environment.Exit(0);
-                }
+                //Programm hier beenden
+                Environment.Exit(0);
             }
 
             //Rdp-List neu einbinden

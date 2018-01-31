@@ -22,7 +22,7 @@ namespace RemoteDesktopManager.RdpConnections
             if (connectionManager == null) throw new ArgumentNullException(nameof(connectionManager));
 
             //Die Daten per DataReader herunterladen
-            SqliteDataReader reader = connectionManager.GetSqlResult("Select * from " + TABLE_CONNECTIONS);
+            SqliteDataReader reader = connectionManager.GetSqlResult("Select * from " + TABLE_CONNECTIONS + " order by Name");
             
             //Mit einer If prüfen, ob Rows im Reader erhalten sind. Wenn nicht, direkt zum Ende der Methode gehen
             if (reader.HasRows)
