@@ -45,6 +45,13 @@ namespace RemoteDesktopManager
         /// </summary>
         private void OpenRdpConnection(RemoteDesktopData rdpData)
         {
+            //Es wird ein Ping-Test durchgeführt. Schlägt dieser fehl, Methode abbrechen und Fehlermeldung ausgeben
+            if (!PingClient.PingHost(rdpData.IpAdresse))
+            {
+                MessageBox.Show("Es konnte kein Ping mit dem Host hergestellt werden", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; //Methode beenden
+            }
+
             RemoteDesktopTabPage rdp = new RemoteDesktopTabPage(rdpData);
             if (!rdp.IsDenied)
                 tabc.TabPages.Add(rdp); //TabPage hinzufügen
