@@ -28,6 +28,10 @@ namespace RemoteDesktopManager
             lbip.Text = rdpData.IpAdresse;
             m_id = id;
 
+            //Wenn ein Passwort vergeben wurde, dann soll das ! angezeigt werden
+            if (m_data.Password != "") lbpassword.Visible = true;
+            else lbpassword.Visible = false;
+
             //Events anbinden
             picimagerdp.DoubleClick += Redirect_DoubleClick;
             lbconname.DoubleClick += Redirect_DoubleClick;
@@ -66,6 +70,10 @@ namespace RemoteDesktopManager
                 //Control-Texte anpassen
                 lbconname.Text = m_data.ConnectionName;
                 lbip.Text = m_data.IpAdresse;
+
+                //Wenn ein Passwort vergeben wurde, dann soll das ! angezeigt werden
+                if (m_data.Password != "") lbpassword.Visible = true;
+                else lbpassword.Visible = false;
 
                 //Event auslösen
                 EntryChanged(m_id, frm.RemoteDesktopData);

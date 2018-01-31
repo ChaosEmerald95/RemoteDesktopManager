@@ -31,14 +31,15 @@
             this.components = new System.ComponentModel.Container();
             this.lbconname = new System.Windows.Forms.Label();
             this.lbip = new System.Windows.Forms.Label();
-            this.picimagerdp = new System.Windows.Forms.PictureBox();
             this.contextsingleconnection = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmenuitemconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmenuitemeditsettings = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmenuitemsdelete = new System.Windows.Forms.ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.picimagerdp)).BeginInit();
+            this.lbpassword = new System.Windows.Forms.Label();
+            this.picimagerdp = new System.Windows.Forms.PictureBox();
             this.contextsingleconnection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picimagerdp)).BeginInit();
             this.SuspendLayout();
             // 
             // lbconname
@@ -64,16 +65,6 @@
             this.lbip.TabIndex = 0;
             this.lbip.Text = "lbip";
             // 
-            // picimagerdp
-            // 
-            this.picimagerdp.BackgroundImage = global::RemoteDesktopManager.Properties.Resources.thumb__emote__esktop__onnection;
-            this.picimagerdp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picimagerdp.Location = new System.Drawing.Point(11, 3);
-            this.picimagerdp.Name = "picimagerdp";
-            this.picimagerdp.Size = new System.Drawing.Size(48, 48);
-            this.picimagerdp.TabIndex = 1;
-            this.picimagerdp.TabStop = false;
-            // 
             // contextsingleconnection
             // 
             this.contextsingleconnection.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -82,32 +73,54 @@
             this.tsmenuitemeditsettings,
             this.tsmenuitemsdelete});
             this.contextsingleconnection.Name = "contextsingleconnection";
-            this.contextsingleconnection.Size = new System.Drawing.Size(153, 98);
+            this.contextsingleconnection.Size = new System.Drawing.Size(131, 76);
             // 
             // tsmenuitemconnect
             // 
             this.tsmenuitemconnect.Name = "tsmenuitemconnect";
-            this.tsmenuitemconnect.Size = new System.Drawing.Size(152, 22);
+            this.tsmenuitemconnect.Size = new System.Drawing.Size(130, 22);
             this.tsmenuitemconnect.Text = "Verbinden";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(127, 6);
             // 
             // tsmenuitemeditsettings
             // 
             this.tsmenuitemeditsettings.Name = "tsmenuitemeditsettings";
-            this.tsmenuitemeditsettings.Size = new System.Drawing.Size(152, 22);
+            this.tsmenuitemeditsettings.Size = new System.Drawing.Size(130, 22);
             this.tsmenuitemeditsettings.Text = "Bearbeiten";
             this.tsmenuitemeditsettings.Click += new System.EventHandler(this.tsmenuitemeditsettings_Click);
             // 
             // tsmenuitemsdelete
             // 
             this.tsmenuitemsdelete.Name = "tsmenuitemsdelete";
-            this.tsmenuitemsdelete.Size = new System.Drawing.Size(152, 22);
+            this.tsmenuitemsdelete.Size = new System.Drawing.Size(130, 22);
             this.tsmenuitemsdelete.Text = "Löschen";
             this.tsmenuitemsdelete.Click += new System.EventHandler(this.tsmenuitemsdelete_Click);
+            // 
+            // lbpassword
+            // 
+            this.lbpassword.AutoSize = true;
+            this.lbpassword.BackColor = System.Drawing.Color.Transparent;
+            this.lbpassword.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbpassword.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lbpassword.Location = new System.Drawing.Point(0, 2);
+            this.lbpassword.Name = "lbpassword";
+            this.lbpassword.Size = new System.Drawing.Size(14, 20);
+            this.lbpassword.TabIndex = 2;
+            this.lbpassword.Text = "!";
+            // 
+            // picimagerdp
+            // 
+            this.picimagerdp.BackgroundImage = global::RemoteDesktopManager.Properties.Resources.thumb__emote__esktop__onnection;
+            this.picimagerdp.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picimagerdp.Location = new System.Drawing.Point(13, 3);
+            this.picimagerdp.Name = "picimagerdp";
+            this.picimagerdp.Size = new System.Drawing.Size(48, 48);
+            this.picimagerdp.TabIndex = 3;
+            this.picimagerdp.TabStop = false;
             // 
             // RemoteDesktopListItem
             // 
@@ -117,12 +130,13 @@
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ContextMenuStrip = this.contextsingleconnection;
             this.Controls.Add(this.picimagerdp);
+            this.Controls.Add(this.lbpassword);
             this.Controls.Add(this.lbip);
             this.Controls.Add(this.lbconname);
             this.Name = "RemoteDesktopListItem";
             this.Size = new System.Drawing.Size(362, 55);
-            ((System.ComponentModel.ISupportInitialize)(this.picimagerdp)).EndInit();
             this.contextsingleconnection.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picimagerdp)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,11 +146,12 @@
 
         private System.Windows.Forms.Label lbconname;
         private System.Windows.Forms.Label lbip;
-        private System.Windows.Forms.PictureBox picimagerdp;
         private System.Windows.Forms.ContextMenuStrip contextsingleconnection;
         private System.Windows.Forms.ToolStripMenuItem tsmenuitemconnect;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsmenuitemeditsettings;
         private System.Windows.Forms.ToolStripMenuItem tsmenuitemsdelete;
+        private System.Windows.Forms.Label lbpassword;
+        private System.Windows.Forms.PictureBox picimagerdp;
     }
 }

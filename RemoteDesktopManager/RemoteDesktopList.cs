@@ -245,7 +245,7 @@ namespace RemoteDesktopManager
         public void EntryChanged_Folder(int id, string folderName)
         {
             //SQL-Befehl ausführen
-            m_conmanager.ExecuteSql("update tblConnectiomnStructure set Name='" + folderName + "' where Id=" + id.ToString() + ";");
+            m_conmanager.ExecuteSql("update tblConnectionStructure set Name='" + folderName + "' where Id=" + id.ToString() + ";");
 
             //Einträge neu laden
             LoadEntryList();
@@ -261,7 +261,7 @@ namespace RemoteDesktopManager
         public void EntryChanged_Connection(int id, RemoteDesktopData rdpData)
         {
             //SQL-Befehl ausführen
-            m_conmanager.ExecuteSql("update tblConnectiomnStructure set Name='" + rdpData.ConnectionName + "', Hostname='" + rdpData.IpAdresse + "', Username='" + rdpData.Username + "', Password='" + rdpData.Password + "' where Id=" + id.ToString() + ";");
+            m_conmanager.ExecuteSql("update tblConnectionStructure set Name='" + rdpData.ConnectionName + "', Hostname='" + rdpData.IpAdresse + "', Username='" + rdpData.Username + "', Password='" + rdpData.Password + "' where Id=" + id.ToString() + ";");
 
             //Einträge neu laden
             LoadEntryList();
