@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RemoteDesktopManager.RdpConnections;
+using System;
 using System.Windows.Forms;
 
 namespace RemoteDesktopManager
@@ -8,6 +9,7 @@ namespace RemoteDesktopManager
     /// </summary>
     public partial class RemoteDesktopListFolderItem : UserControl
     {
+        private RdpFolderStructureEntry m_folder = null; //Die Daten des Ordners
         private int m_folderid = -1; //Die ID des Ordners
 
         //Events
@@ -17,13 +19,13 @@ namespace RemoteDesktopManager
         /// <summary>
         /// Erstellt eine neue Instanz von RemoteDesktopListFolderItem
         /// </summary>
-        /// <param name="folderId">Die ID des Ordners</param>
-        /// <param name="folderName">Der Name des Ordners</param>
-        public RemoteDesktopListFolderItem(int folderId, string folderName)
+        /// <param name="folderEntry">Die Daten des Ordners</param>
+        public RemoteDesktopListFolderItem(RdpFolderStructureEntry folderEntry)
         {
             InitializeComponent();
-            m_folderid = folderId;
-            lbfoldername.Text = folderName;
+            m_folder = folderEntry;
+            m_folderid = folderEntry.Id;
+            lbfoldername.Text = folderEntry.Caption;
 
             //Events anbinden
             this.picimagerdp.DoubleClick += Redirect_DoubleClick;

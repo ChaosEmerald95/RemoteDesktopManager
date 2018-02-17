@@ -45,6 +45,7 @@ namespace RemoteDesktopManager.RdpConnections
                         entry.HostName = reader["Hostname"].ToString();
                         entry.UserName = reader["Username"].ToString();
                         entry.Password = reader["Password"].ToString();
+                        entry.PingHost = Convert.ToBoolean(Convert.ToInt32(reader["PingHost"]));
 
                         //Eintrag der Liste hinzufügen
                         t_lentries.Add(entry);

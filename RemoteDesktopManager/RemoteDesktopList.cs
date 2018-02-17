@@ -86,7 +86,7 @@ namespace RemoteDesktopManager
                         if (rdp.Type == 1 && rdp.ParentId == m_actualid)
                         {
                             //Control erstellen und einbinden
-                            RemoteDesktopListFolderItem l = new RemoteDesktopListFolderItem(rdp.Id, rdp.Caption);
+                            RemoteDesktopListFolderItem l = new RemoteDesktopListFolderItem(rdp);
                             
                             //Events anbinden
                             l.DoubleClick += RemoteDesktopFolderItem_Clicked;
@@ -106,12 +106,8 @@ namespace RemoteDesktopManager
                         //Der Typ muss 1 sein und die ParentId die aktuelle Id des Controls
                         if (rdp.Type == 0 && rdp.ParentId == m_actualid)
                         {
-                            //RemoteDesktopData bilden
-                            RdpFolderStructureRdpEntry re = (RdpFolderStructureRdpEntry)rdp;
-                            RemoteDesktopData r = new RemoteDesktopData(re.HostName, re.UserName, re.Password, re.Caption);
-
                             //Control erstellen und einbinden
-                            RemoteDesktopListItem l = new RemoteDesktopListItem(r, re.Id);
+                            RemoteDesktopListItem l = new RemoteDesktopListItem((RdpFolderStructureRdpEntry)rdp);
 
                             //Events anbinden
                             l.DoubleClick += RemoteDesktopItem_Clicked; 

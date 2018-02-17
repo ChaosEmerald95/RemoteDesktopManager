@@ -103,7 +103,7 @@ namespace RemoteDesktopManager.RdpConnections
             //Tabelle erstellen
             using (var command = t_con.CreateCommand())
             {
-                command.CommandText = "create table tblConnectionStructure (Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ParentId INTEGER, Name TEXT, Type INTEGER, Hostname TEXT, Username TEXT, Password TEXT, Bemerkung TEXT);";
+                command.CommandText = "create table tblConnectionStructure (Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ParentId INTEGER, Name TEXT, Type INTEGER, Hostname TEXT, Username TEXT, Password TEXT, PingHost INTEGER, Bemerkung TEXT);";
                 command.ExecuteNonQuery();
             }
             t_con.Close();

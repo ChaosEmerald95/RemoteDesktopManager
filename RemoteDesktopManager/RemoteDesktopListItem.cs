@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RemoteDesktopManager.RdpConnections;
+using System;
 using System.Windows.Forms;
 
 namespace RemoteDesktopManager
@@ -8,7 +9,8 @@ namespace RemoteDesktopManager
     /// </summary>
     public partial class RemoteDesktopListItem : UserControl
     {
-        private RemoteDesktopData m_data; //Die Daten der RemoeDesktop-Verbindung
+        private RdpFolderStructureRdpEntry m_rdp = null; //Das RemoteDesktop-Objekt mit den Daten
+        private RemoteDesktopData m_data; //Die Daten der RemoeDesktop-Verbindung (deprecated)
         private int m_id = -1; //Die ID des Eintrags
 
         //Events
@@ -18,18 +20,18 @@ namespace RemoteDesktopManager
         /// <summary>
         /// Erstellt eine neue Instanz von RemoteDesktopListItem
         /// </summary>
-        /// <param name="rdpData">Die Daten zur Remote-Desktop-Verbindung</param>
-        /// <param name="id">Die ID des Eintrags in der Datenbank</param>
-        public RemoteDesktopListItem(RemoteDesktopData rdpData, int id)
+        /// <param name="rdpEntry">Die Daten zur Remote-Desktop-Verbindung</param>
+        public RemoteDesktopListItem(RdpFolderStructureRdpEntry rdpEntry)
         {
             InitializeComponent();
-            m_data = rdpData;
-            lbconname.Text = rdpData.ConnectionName;
-            lbip.Text = rdpData.IpAdresse;
-            m_id = id;
+            m_rdp = rdpEntry;
+            m_data = new RemoteDesktopData(rdpEntry.HostName, rdpEntry.UserName, rdpEntry.Password, rdpEntry.Caption);
+            lbconname.Text = m_rdp.Caption;
+            lbip.Text = m_rdp.HostName;
+            m_id = m_rdp.Id;
 
             //Wenn ein Passwort vergeben wurde, dann soll das ! angezeigt werden
-            if (m_data.Password != "") lbpassword.Visible = true;
+            if (m_rdp.Password != "") lbpassword.Visible = true;
             else lbpassword.Visible = false;
 
             //Events anbinden

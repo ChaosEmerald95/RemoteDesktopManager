@@ -8,8 +8,8 @@
     <Product>RemoteDesktopManager</Product>
     <Copyright>©ChaosEmerald95  2018</Copyright>
     <PackageId>RemoteDesktopManager.RdpConnections</PackageId>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyVersion>1.0.0.2</AssemblyVersion>
+    <FileVersion>1.0.0.2</FileVersion>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
