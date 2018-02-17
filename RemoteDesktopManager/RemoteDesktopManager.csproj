@@ -96,7 +96,6 @@
     <Compile Include="Components\RemoteDesktopTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ConnectionFileHandler.cs" />
     <Compile Include="dlgrdplistnewelement.cs">
       <SubType>Form</SubType>
     </Compile>

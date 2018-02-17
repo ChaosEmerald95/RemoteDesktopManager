@@ -1,5 +1,6 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Runtime.CompilerServices;
@@ -12,7 +13,21 @@ namespace RemoteDesktopManager.RdpConnections
     public class SqliteConnectionManager
     {
         private string m_connectionstring = ""; //Der Connection-String, der verwendet wird
-        private Microsoft.Data.Sqlite.SqliteConnection m_connection = null; //Das Objekt für die Datenbank-Verbindung
+        private SqliteConnection m_connection = null; //Das Objekt für die Datenbank-Verbindung
+
+        //Liste aller Spalten
+        private static readonly List<SqliteColumnDefinition> m_dbcolumns = new List<SqliteColumnDefinition>
+        {
+            new SqliteColumnDefinition("Id", "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT"),
+            new SqliteColumnDefinition("ParentId", "INTEGER"),
+            new SqliteColumnDefinition("Name", "TEXT"),
+            new SqliteColumnDefinition("Type", "INTEGER"),
+            new SqliteColumnDefinition("Hostname", "TEXT"),
+            new SqliteColumnDefinition("Username", "TEXT"),
+            new SqliteColumnDefinition("Password", "TEXT"),
+            new SqliteColumnDefinition("PingHost", "INTEGER"),
+            new SqliteColumnDefinition("Bemerkung", "TEXT")
+        };
 
         /// <summary>
         /// Erstellt eine neue Instanz von SqliteConnectionManager
@@ -21,7 +36,8 @@ namespace RemoteDesktopManager.RdpConnections
         public SqliteConnectionManager(string connectionString)
         {
             if (connectionString == null) throw new ArgumentNullException(nameof(connectionString)); //Wenn null, dann soll eine Exception ausgegeben werden
-            m_connection = new Microsoft.Data.Sqlite.SqliteConnection(connectionString);
+            m_connection = new SqliteConnection(connectionString);
+            UpdateDatabaseStructure();
         }
 
         /// <summary>
@@ -57,11 +73,11 @@ namespace RemoteDesktopManager.RdpConnections
             try
             {
                 //Verbindung herstellen
-                Microsoft.Data.Sqlite.SqliteConnection conn = new Microsoft.Data.Sqlite.SqliteConnection(t);
+                SqliteConnection conn = new SqliteConnection(t);
                 conn.Open();
 
                 //Command testen
-                Microsoft.Data.Sqlite.SqliteCommand command = conn.CreateCommand();
+                SqliteCommand command = conn.CreateCommand();
                 command.CommandText = string.Format("select * from tblConnectionStructure;");
                 command.ExecuteScalar();
                 if (conn.State == ConnectionState.Open)
@@ -86,7 +102,7 @@ namespace RemoteDesktopManager.RdpConnections
             fs.Close();
 
             //Die Datenbank-Verbindung öffnen
-            Microsoft.Data.Sqlite.SqliteConnection t_con = new Microsoft.Data.Sqlite.SqliteConnection(CreateConnectionString(filePath));
+            SqliteConnection t_con = new SqliteConnection(CreateConnectionString(filePath));
             t_con.Open();
 
             //Wenn ein Passwort vergeben wurde, das auch ändern
@@ -103,10 +119,35 @@ namespace RemoteDesktopManager.RdpConnections
             //Tabelle erstellen
             using (var command = t_con.CreateCommand())
             {
-                command.CommandText = "create table tblConnectionStructure (Id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, ParentId INTEGER, Name TEXT, Type INTEGER, Hostname TEXT, Username TEXT, Password TEXT, PingHost INTEGER, Bemerkung TEXT);";
+                //SQL-Befehl erstellen
+                string sql = "create table tblConnectionStructure (";
+                for (byte i = 0; i < m_dbcolumns.Count; i++)
+                {
+                    sql += m_dbcolumns[i].ColumnName + " " + m_dbcolumns[i].ColumnType;
+                    if (i != (m_dbcolumns.Count - 1)) sql += ", ";
+                }
+                sql += ");";
+                //Befehl ausführen
+                command.CommandText = sql;
                 command.ExecuteNonQuery();
             }
             t_con.Close();
+        }
+
+        /// <summary>
+        /// Aktualisiert die Tabelle "tblConnectionStructure" mit den neuen Spalten (wenn welche verfügbar sind)
+        /// </summary>
+        private void UpdateDatabaseStructure()
+        {
+            //In einer Foreach alle durchgehen und Exceptions ignorieren
+            foreach(SqliteColumnDefinition s in m_dbcolumns)
+            {
+                try
+                {
+                    ExecuteSql("alter table tblConnectionStructure add column " + s.ColumnName + " " + s.ColumnType + ";");
+                }
+                catch { }
+            }
         }
 
         /// <summary>
@@ -152,7 +193,7 @@ namespace RemoteDesktopManager.RdpConnections
         {
             get
             {
-                if (m_connection.State == System.Data.ConnectionState.Closed || m_connection.State == System.Data.ConnectionState.Broken)
+                if (m_connection.State == ConnectionState.Closed || m_connection.State == ConnectionState.Broken)
                     return false;
                 return true;
             }
@@ -168,7 +209,7 @@ namespace RemoteDesktopManager.RdpConnections
             if (sqlCommand == "") throw new ArgumentException("The Sql-Command can't be empty"); //Wenn es ein leerer Befehl ist, eine Exception zurückgeben
 
             //Befehl ausführen
-            Microsoft.Data.Sqlite.SqliteCommand cmd = new Microsoft.Data.Sqlite.SqliteCommand(sqlCommand, m_connection);
+            SqliteCommand cmd = new SqliteCommand(sqlCommand, m_connection);
             if (!IsConnected) OpenConnection(); //Wenn die Verbindung noch geschlossen ist, dann soll diese geöffnet werden
 
             //Befehl ausführen
@@ -189,15 +230,15 @@ namespace RemoteDesktopManager.RdpConnections
             if (sqlCommand == "") throw new ArgumentException("The Sql-Command can't be empty"); //Wenn es ein leerer Befehl ist, eine Exception zurückgeben
 
             //Befehl ausführen
-            Microsoft.Data.Sqlite.SqliteCommand cmd = new Microsoft.Data.Sqlite.SqliteCommand(sqlCommand, m_connection);
+            SqliteCommand cmd = new SqliteCommand(sqlCommand, m_connection);
             if (!IsConnected) OpenConnection(); //Wenn die Verbindung noch geschlossen ist, dann soll diese geöffnet werden
 
             //Befehl ausführen
             cmd.CommandText = sqlCommand;
-            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandType = CommandType.Text;
 
             //Daten erhalten und lesen
-            Microsoft.Data.Sqlite.SqliteDataReader reader = cmd.ExecuteReader();
+            SqliteDataReader reader = cmd.ExecuteReader();
 
             //Objekte vernichten und Verbindung schliessen
             CloseConnection();
