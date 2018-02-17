@@ -43,7 +43,7 @@
             // 
             this.lblinksrccode.AutoSize = true;
             this.lblinksrccode.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblinksrccode.Location = new System.Drawing.Point(15, 193);
+            this.lblinksrccode.Location = new System.Drawing.Point(15, 190);
             this.lblinksrccode.Name = "lblinksrccode";
             this.lblinksrccode.Size = new System.Drawing.Size(93, 20);
             this.lblinksrccode.TabIndex = 8;
@@ -105,7 +105,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(15, 162);
+            this.label2.Location = new System.Drawing.Point(15, 160);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(313, 20);
             this.label2.TabIndex = 4;

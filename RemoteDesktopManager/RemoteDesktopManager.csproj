@@ -149,7 +149,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RdpLog.cs" />
-    <Compile Include="RemoteDesktopData.cs" />
     <Compile Include="RemoteDesktopList.cs">
       <SubType>UserControl</SubType>
     </Compile>
