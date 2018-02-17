@@ -80,7 +80,7 @@ namespace RemoteDesktopManager.RdpConnections
         private string m_host = ""; //Die Adresse des Hosts
         private string m_username = ""; //Der Username des Eintrags
         private string m_password = ""; //Das Passwort des Eintrags
-        private bool m_pinghost = true; //Angabe, ob der Host vor der Verbindung angepingt werden soll
+        private bool m_pinghost = false; //Angabe, ob der Host vor der Verbindung angepingt werden soll
 
         /// <summary>
         /// Erstellt eine neue Instanz von RdpFolderStructureRdpEntry

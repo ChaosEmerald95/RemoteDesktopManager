@@ -10,12 +10,10 @@ namespace RemoteDesktopManager
     public partial class RemoteDesktopListItem : UserControl
     {
         private RdpFolderStructureRdpEntry m_rdp = null; //Das RemoteDesktop-Objekt mit den Daten
-        private RemoteDesktopData m_data; //Die Daten der RemoeDesktop-Verbindung (deprecated)
-        private int m_id = -1; //Die ID des Eintrags
 
         //Events
         public event RemoteDesktopItemRemoveEventHandler EntryRemove;
-        public event RemoteDesktopItemConnectionChangedEventHandler EntryChanged;
+        public event RemoteDesktopItemChangedEventHandler EntryChanged;
 
         /// <summary>
         /// Erstellt eine neue Instanz von RemoteDesktopListItem
@@ -25,10 +23,8 @@ namespace RemoteDesktopManager
         {
             InitializeComponent();
             m_rdp = rdpEntry;
-            m_data = new RemoteDesktopData(rdpEntry.HostName, rdpEntry.UserName, rdpEntry.Password, rdpEntry.Caption);
             lbconname.Text = m_rdp.Caption;
             lbip.Text = m_rdp.HostName;
-            m_id = m_rdp.Id;
 
             //Wenn ein Passwort vergeben wurde, dann soll das ! angezeigt werden
             if (m_rdp.Password != "") lbpassword.Visible = true;
@@ -44,7 +40,7 @@ namespace RemoteDesktopManager
         /// <summary>
         /// Gibt die Informationen zur RemoteDesktop-Verbindung zurück
         /// </summary>
-        public RemoteDesktopData RemoteDesktopData { get => m_data; }
+        public RdpFolderStructureRdpEntry RemoteDesktopData { get => m_rdp; }
 
         /// <summary>
         /// Event-Methode:
@@ -63,22 +59,22 @@ namespace RemoteDesktopManager
         /// </summary>
         private void tsmenuitemeditsettings_Click(object sender, System.EventArgs e)
         {
-            frmremotedesktopentry frm = new frmremotedesktopentry(m_data); //Daten übergeben, damit diese bearbeitet werden können
+            frmremotedesktopentry frm = new frmremotedesktopentry(m_rdp); //Daten übergeben, damit diese bearbeitet werden können
             frm.ShowDialog();
             if (frm.RemoteDesktopData != null) //Wenn es nicht null ist, dann wurden die Änderungen gespeichert
             {
-                m_data = frm.RemoteDesktopData; //Daten speichern
+                m_rdp = frm.RemoteDesktopData; //Daten speichern
 
                 //Control-Texte anpassen
-                lbconname.Text = m_data.ConnectionName;
-                lbip.Text = m_data.IpAdresse;
+                lbconname.Text = m_rdp.Caption;
+                lbip.Text = m_rdp.HostName;
 
                 //Wenn ein Passwort vergeben wurde, dann soll das ! angezeigt werden
-                if (m_data.Password != "") lbpassword.Visible = true;
+                if (m_rdp.Password != "") lbpassword.Visible = true;
                 else lbpassword.Visible = false;
 
                 //Event auslösen
-                EntryChanged(m_id, frm.RemoteDesktopData);
+                EntryChanged(m_rdp);
             }
         }
 
@@ -91,7 +87,7 @@ namespace RemoteDesktopManager
             //Bevor der Eintrag gelöscht wird
             //muss der Benutzer den Löschvorgang bestätigen
             if (MessageBox.Show("Soll die RemoteDesktop-Verbindung wirklich gelöscht werden?", "Hinweis", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                EntryRemove(m_id);
+                EntryRemove(m_rdp.Id);
         }
         #endregion
     }

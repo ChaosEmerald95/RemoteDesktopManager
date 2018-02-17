@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RemoteDesktopManager.RdpConnections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +16,7 @@ namespace RemoteDesktopManager
     /// </summary>
     public partial class frmenterconnectiondata : Form
     {
-        private RemoteDesktopData m_rdpdata = null;
+        private RdpFolderStructureRdpEntry m_rdp = null; //Speichert die Verbindungsdaten zwischen (zumindest ein Teil davon)
 
         /// <summary>
         /// Erstellt eine neue Instanz von frmenterconnectiondata
@@ -23,14 +24,16 @@ namespace RemoteDesktopManager
         public frmenterconnectiondata()
         {
             InitializeComponent();
+            txtcomputer.KeyDown += TextBox_KeyDown;
+            txtusername.KeyDown += TextBox_KeyDown;
         }
 
         /// <summary>
         /// Gibt die RemoteDesktop-Daten zurück, die gespeichert wurden. Wenn der Wert null ist, dann wurde das ganze abgebrochen
         /// </summary>
-        public RemoteDesktopData RemoteDesktopData
+        public RdpFolderStructureRdpEntry RemoteDesktopData
         {
-            get => m_rdpdata;
+            get => m_rdp;
         }
 
         /// <summary>
@@ -53,7 +56,9 @@ namespace RemoteDesktopManager
             }
 
             //Daten speichern
-            m_rdpdata = new RemoteDesktopData(txtcomputer.Text, txtusername.Text, "", txtcomputer.Text);
+            m_rdp = new RdpFolderStructureRdpEntry();
+            m_rdp.HostName = txtcomputer.Text;
+            m_rdp.UserName = txtusername.Text;
 
             //Schliessen
             Close();
@@ -63,20 +68,9 @@ namespace RemoteDesktopManager
         /// Event-Methode:
         /// Wenn auf ENTER gedrückt wird, dann soll das Button-Event ausgelöst werden
         /// </summary>
-        private void txtcomputer_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-                btnconnect_Click(btnconnect, null);
-        }
-
-        /// <summary>
-        /// Event-Methode:
-        /// Wenn auf ENTER gedrückt wird, dann soll das Button-Event ausgelöst werden
-        /// </summary>
-        private void txtusername_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-                btnconnect_Click(btnconnect, null);
+            if (e.KeyCode == Keys.Enter) btnconnect_Click(this, null);
         }
     }
 }

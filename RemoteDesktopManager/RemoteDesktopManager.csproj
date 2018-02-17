@@ -109,11 +109,11 @@
     <Compile Include="frmabout.Designer.cs">
       <DependentUpon>frmabout.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmenterfolderdata.cs">
+    <Compile Include="frmfolderentry.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmenterfolderdata.Designer.cs">
-      <DependentUpon>frmenterfolderdata.cs</DependentUpon>
+    <Compile Include="frmfolderentry.Designer.cs">
+      <DependentUpon>frmfolderentry.cs</DependentUpon>
     </Compile>
     <Compile Include="frmenterconnectiondata.cs">
       <SubType>Form</SubType>
@@ -180,8 +180,8 @@
     <EmbeddedResource Include="frmabout.resx">
       <DependentUpon>frmabout.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmenterfolderdata.resx">
-      <DependentUpon>frmenterfolderdata.cs</DependentUpon>
+    <EmbeddedResource Include="frmfolderentry.resx">
+      <DependentUpon>frmfolderentry.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmenterconnectiondata.resx">
       <DependentUpon>frmenterconnectiondata.cs</DependentUpon>

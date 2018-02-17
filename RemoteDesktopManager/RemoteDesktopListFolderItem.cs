@@ -10,11 +10,10 @@ namespace RemoteDesktopManager
     public partial class RemoteDesktopListFolderItem : UserControl
     {
         private RdpFolderStructureEntry m_folder = null; //Die Daten des Ordners
-        private int m_folderid = -1; //Die ID des Ordners
 
         //Events
         public event RemoteDesktopItemRemoveEventHandler EntryRemove;
-        public event RemoteDesktopItemFolderChangedEventHandler EntryChanged;
+        public event RemoteDesktopItemChangedEventHandler EntryChanged;
 
         /// <summary>
         /// Erstellt eine neue Instanz von RemoteDesktopListFolderItem
@@ -24,7 +23,6 @@ namespace RemoteDesktopManager
         {
             InitializeComponent();
             m_folder = folderEntry;
-            m_folderid = folderEntry.Id;
             lbfoldername.Text = folderEntry.Caption;
 
             //Events anbinden
@@ -35,7 +33,7 @@ namespace RemoteDesktopManager
         /// <summary>
         /// Gibt die ID des Ordners zurück
         /// </summary>
-        public int FolderId { get => m_folderid; }
+        public int FolderId { get => m_folder.Id; }
 
         /// <summary>
         /// Event_Methode:
@@ -53,15 +51,18 @@ namespace RemoteDesktopManager
         /// </summary>
         private void tsmenuitemeditsettings_Click(object sender, EventArgs e)
         {
-            frmenterfolderdata frm = new frmenterfolderdata(lbfoldername.Text);
+            frmfolderentry frm = new frmfolderentry(m_folder);
             frm.ShowDialog();
-            if (frm.FolderName != "") //Wenn es nicht null ist, dann wurden die Änderungen gespeichert
+            if (frm.FolderData != null) //Wenn es nicht null ist, dann wurden die Änderungen gespeichert
             {
+                //Änderungen speichern
+                m_folder = frm.FolderData;
+
                 //Control-Texte anpassen
-                lbfoldername.Text = frm.FolderName;
+                lbfoldername.Text = m_folder.Caption;
 
                 //Event auslösen
-                EntryChanged(m_folderid, frm.FolderName);
+                EntryChanged(m_folder);
             }
         }
 
@@ -74,7 +75,7 @@ namespace RemoteDesktopManager
             //Bevor der Eintrag gelöscht wird 
             //muss der Benutzer den Löschvorgang bestätigen
             if (MessageBox.Show("Soll der Ordner wirklich werden?" + Environment.NewLine + Environment.NewLine + "Alle Einträge und Ordner in diesem Ordner werden mit entfernt", "Hinweis", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                EntryRemove(m_folderid);
+                EntryRemove(m_folder.Id);
         }
     }
 }

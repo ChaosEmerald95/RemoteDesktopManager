@@ -5,10 +5,9 @@ using System.Windows.Forms;
 
 namespace RemoteDesktopManager
 {
-    public delegate void RemoteDesktopItemEventHandler(RemoteDesktopData data); //Der Delegate für das Event
+    public delegate void RemoteDesktopItemEventHandler(RdpFolderStructureRdpEntry rdpEntry); //Der Delegate für das Event
     public delegate void RemoteDesktopItemRemoveEventHandler(int id); //Der Delegate für das Event, wenn ein Eintrag gelöscht werden soll
-    public delegate void RemoteDesktopItemFolderChangedEventHandler(int id, string foldername);
-    public delegate void RemoteDesktopItemConnectionChangedEventHandler(int id, RemoteDesktopData rdpData);
+    public delegate void RemoteDesktopItemChangedEventHandler(RdpFolderStructureEntry rdpStructureEntry); //Der Delegate für das Event, wenn ein Eintrag geändert wird
 
     /// <summary>
     /// Zeigt die Kunden-Liste an
@@ -91,7 +90,7 @@ namespace RemoteDesktopManager
                             //Events anbinden
                             l.DoubleClick += RemoteDesktopFolderItem_Clicked;
                             l.EntryRemove += RemoveEntry;
-                            l.EntryChanged += EntryChanged_Folder;
+                            l.EntryChanged += EntryChanged;
 
                             l.Dock = DockStyle.Top;
                             l.Show();
@@ -112,7 +111,7 @@ namespace RemoteDesktopManager
                             //Events anbinden
                             l.DoubleClick += RemoteDesktopItem_Clicked; 
                             l.EntryRemove += RemoveEntry;
-                            l.EntryChanged += EntryChanged_Connection;
+                            l.EntryChanged += EntryChanged;
 
                             l.Dock = DockStyle.Top;
                             l.Show();
@@ -174,14 +173,13 @@ namespace RemoteDesktopManager
             //Anhand des Ergebnisses weiterarbeiten
             if (dlg.DialogResultId == 1) //Ein neuer Ordner soll erstellt werden
             {
-                frmenterfolderdata frm = new frmenterfolderdata();
+                frmfolderentry frm = new frmfolderentry();
                 frm.ShowDialog();
-                if (frm.FolderName != "") //Nur wenn es NICHT leer ist, darf die Methode fortgesetzt werden
+                if (frm.FolderData != null) //Nur wenn es NICHT leer ist, darf die Methode fortgesetzt werden
                 {
                     //RdpFolderStructureEntry erstellen
-                    RdpFolderStructureEntry re = new RdpFolderStructureEntry();
+                    RdpFolderStructureEntry re = frm.FolderData;
                     re.ParentId = m_actualid;
-                    re.Caption = frm.FolderName;
                     re.Type = 1; //Für Ordner
 
                     //Eintrag speichern
@@ -199,13 +197,9 @@ namespace RemoteDesktopManager
                 if (frm.RemoteDesktopData != null) //Nur wenn es NICHT null ist, darf die Methode fortgesetzt werden
                 {
                     //RdpFolderStructureRemoteEntry erstellen
-                    RdpFolderStructureRdpEntry re = new RdpFolderStructureRdpEntry();
+                    RdpFolderStructureRdpEntry re = frm.RemoteDesktopData;
                     re.ParentId = m_actualid;
-                    re.Caption = frm.RemoteDesktopData.ConnectionName;
                     re.Type = 0; //Für RDP-Einträge
-                    re.HostName = frm.RemoteDesktopData.IpAdresse;
-                    re.UserName = frm.RemoteDesktopData.Username;
-                    re.Password = frm.RemoteDesktopData.Password;
 
                     //Eintrag speichern
                     SqliteDataIO.UpdateEntry(m_conmanager, re, true);
@@ -236,28 +230,22 @@ namespace RemoteDesktopManager
         /// Event-Methode:
         /// Ändert die Daten in der Datenbank
         /// </summary>
-        /// <param name="id">Die ID des Eintrags</param>
-        /// <param name="folderName">Der Name des Ordners</param>
-        public void EntryChanged_Folder(int id, string folderName)
+        /// <param name="rdpStructureEntry">Das Objekt mit den Daten</param>
+        public void EntryChanged(RdpFolderStructureEntry rdpStructureEntry)
         {
-            //SQL-Befehl ausführen
-            m_conmanager.ExecuteSql("update tblConnectionStructure set Name='" + folderName + "' where Id=" + id.ToString() + ";");
+            //Hier wird der SQL-Befehl gespeichert. Es sollen nur die Felder geändert werden, die auch geändert werden können
+            string sql = "update tblConnectionStructure set Name='" + rdpStructureEntry.Caption + "', Bemerkung='" + rdpStructureEntry.Bemerkung + "'"; 
+            if (rdpStructureEntry.Type == 0) //Es ist eine Verbindung
+            {
+                RdpFolderStructureRdpEntry re = (RdpFolderStructureRdpEntry)rdpStructureEntry; //Objekt casten, um an die zusätzlichen Felder zu kommen
 
-            //Einträge neu laden
-            LoadEntryList();
-            RefreshList();
-        }
+                //SQL-Befehl vervollständigen
+                sql += ", Hostname='" + re.HostName + "', Username='" + re.UserName + "', Password='" + re.Password + "', PingHost=" + Convert.ToInt32(re.PingHost).ToString();
+            }
 
-        /// <summary>
-        /// Event-Methode:
-        /// Ändert die Daten in der Datenbank
-        /// </summary>
-        /// <param name="id">Die ID des Eintrags</param>
-        /// <param name="rdpData">Die RemtoeDesktop-Daten</param>
-        public void EntryChanged_Connection(int id, RemoteDesktopData rdpData)
-        {
-            //SQL-Befehl ausführen
-            m_conmanager.ExecuteSql("update tblConnectionStructure set Name='" + rdpData.ConnectionName + "', Hostname='" + rdpData.IpAdresse + "', Username='" + rdpData.Username + "', Password='" + rdpData.Password + "' where Id=" + id.ToString() + ";");
+            //Ausführung abschliessen
+            sql += " where Id=" + rdpStructureEntry.Id.ToString() + ";";
+            m_conmanager.ExecuteSql(sql);
 
             //Einträge neu laden
             LoadEntryList();

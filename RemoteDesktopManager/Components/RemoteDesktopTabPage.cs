@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using RemoteDesktopManager.RdpConnections;
+using System;
 using System.Windows.Forms;
 
 namespace RemoteDesktopManager.Components
@@ -19,34 +16,24 @@ namespace RemoteDesktopManager.Components
         /// Erstellt eine neue Instanz von RemoteDesktopTabPage
         /// </summary>
         /// <param name="rdpData">Die RemoteDesktop-Daten, die für die Anzeige verwendet werden sollen</param>
-        public RemoteDesktopTabPage(RemoteDesktopData rdpData) :base (rdpData.ConnectionName + " (" + rdpData.IpAdresse + ")")
+        public RemoteDesktopTabPage(RdpFolderStructureRdpEntry rdpEntry) :base (rdpEntry.Caption + " (" + rdpEntry.HostName + ")")
         {
-            //Username und Domäne trennen, wenn ein Backslash vorhanden ist
-            string domain = "";
-            string username = "";
+            //Das Passwort ist ein optionaler Parameter. Wenn keiner gespeichert wurde, dann soll das Eingabefenster erscheinen
+            //Bei Direktverbindungen wird dieses generell geöffnet, da dort keine Passwörter gespeichert werden können
             string password = "";
-            if (rdpData.Username.Contains(@"\"))
-            {
-                domain = rdpData.Username.Substring(0, rdpData.Username.IndexOf(@"\"));
-                username = rdpData.Username.Substring(rdpData.Username.IndexOf(@"\") + 1);
-            }
-            else
-                username = rdpData.Username;
 
             //Wenn kein Passwort übergeben wurde, dann soll das Eingabefenster dazu geöffnet werden
-            if (rdpData.Password != "")
-                password = rdpData.Password;
+            if (rdpEntry.Password != "")
+                password = rdpEntry.Password;
             else
             {
                 //Eingabefenster anzeigen
-                frmenterpassword frmpw = new frmenterpassword(rdpData.Username);
+                frmenterpassword frmpw = new frmenterpassword(rdpEntry.UserName);
                 frmpw.ShowDialog();
 
                 //Wenn es nicht leer ist, frotsetzen
                 if (frmpw.Password != "")
-                {
                     password = frmpw.Password;
-                }
                 else
                 {
                     MessageBox.Show("Es wurde kein Passwort eingegeben! Der Vorgang wird abgebrochen", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -56,7 +43,7 @@ namespace RemoteDesktopManager.Components
             }
 
             //Fenster wird erstellt und mit Daten gefüttert
-            rdpView = new RemoteDesktopTabPageView(rdpData.IpAdresse, username, password, domain);
+            rdpView = new RemoteDesktopTabPageView(rdpEntry.HostName, rdpEntry.GetUserAndDomain().Value, password, rdpEntry.GetUserAndDomain().Key);
             rdpView.Dock = DockStyle.Fill;
             rdpView.TopLevel = false;
             rdpView.FormBorderStyle = FormBorderStyle.None;

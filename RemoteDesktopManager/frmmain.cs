@@ -43,16 +43,19 @@ namespace RemoteDesktopManager
         /// <summary>
         /// Öffnet eine RDP-Verbindung zu einem anderen Computer
         /// </summary>
-        private void OpenRdpConnection(RemoteDesktopData rdpData)
+        private void OpenRdpConnection(RdpFolderStructureRdpEntry rdpEntry)
         {
-            //Es wird ein Ping-Test durchgeführt. Schlägt dieser fehl, Methode abbrechen und Fehlermeldung ausgeben
-            if (!PingClient.PingHost(rdpData.IpAdresse))
+            if (rdpEntry.PingHost) //Wen PingHost true ist, soll auch ein Ping durchgeführt werden
             {
-                MessageBox.Show("Es konnte kein Ping mit dem Host hergestellt werden", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return; //Methode beenden
-            }
+                //Es wird ein Ping-Test durchgeführt. Schlägt dieser fehl, Methode abbrechen und Fehlermeldung ausgeben
+                if (!PingClient.PingHost(rdpEntry.HostName))
+                {
+                    MessageBox.Show("Es konnte kein Ping mit dem Host hergestellt werden", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return; //Methode beenden
+                }
+            }  
 
-            RemoteDesktopTabPage rdp = new RemoteDesktopTabPage(rdpData);
+            RemoteDesktopTabPage rdp = new RemoteDesktopTabPage(rdpEntry);
             if (!rdp.IsDenied)
                 tabc.TabPages.Add(rdp); //TabPage hinzufügen
         }
@@ -74,10 +77,9 @@ namespace RemoteDesktopManager
         /// Event-Methode:
         /// Öffnet eine RemoteDesktop-Verbindung
         /// </summary>
-        private void rdplist_RemoteDesktopItemClicked(RemoteDesktopData data)
+        private void rdplist_RemoteDesktopItemClicked(RdpFolderStructureRdpEntry rdpEntry)
         {
-            System.Diagnostics.Debug.Print("Event frmmain::RemoteDesktopItemClicked executed");
-            OpenRdpConnection(data);
+            OpenRdpConnection(rdpEntry);
         }
 
         /// <summary>
