@@ -12,12 +12,16 @@ Open the RemoteDesktopManager.sln in Microsoft Visual Studio and build it.
 # Future Plans
 - Better Design for the GUI
 - Multi-Language-Framework for the GUI
+- Read RDP-Files
+- Export Connections as RDP-File
+- Bind Events in Code
 - and much more...
 
 # Next Updates
-- Replacing RemoteDesktopData-Objects with RdpFolderStructure-Objects
-- Navigating in RemoteDesktopList
-- Ping-Test to check, if the host is reachable
+- Remove all RemoteDesktopData-Objects and code from the project
+- Clean Using-Directives
+- Bind Events in Code
+- Database-Updater, so the program add the new columns automatically
 
 # The RDP-Control Version isn't available
 This can be happen, if you don't have the latest version of Windows 10. If you want to build with a lower version of the Microsoft RDP Control, follow these steps:
