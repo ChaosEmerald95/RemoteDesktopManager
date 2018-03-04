@@ -114,6 +114,7 @@ namespace RemoteDesktopManager
         /// </summary>
         private void ContextMenuClose_Clicked(object sender, EventArgs e)
         {
+            int t_actualtabindex = tabc.SelectedIndex; //Für die Auswahl der neuen TabPage
             //Verbindung schliessen
             RemoteDesktopTabPage t = (RemoteDesktopTabPage)tabc.SelectedTab;
             if (t.Controls.Count > 0) //Nur RemoteDesktopWindow schliessen, wenn noch mindestens 1 Control enthalten ist
@@ -122,6 +123,12 @@ namespace RemoteDesktopManager
                 r.Disconnect();
             }
             if (!t.IsDisposed) t.Dispose(); //Wenn es noch nicht disposed wurde, dies hier tun
+
+            //Wenn der Index außerhalb des Bereiches ist, den letzten auswählen. Ansonsten die TabPage an dem Index auswählen
+            if (t_actualtabindex >= (tabc.TabPages.Count - 1))
+                tabc.SelectedIndex = tabc.TabPages.Count - 1;
+            else
+                tabc.SelectedIndex = t_actualtabindex;
         }
 
         /// <summary>
