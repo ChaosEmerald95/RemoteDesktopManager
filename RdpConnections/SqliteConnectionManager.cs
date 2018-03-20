@@ -18,15 +18,15 @@ namespace RemoteDesktopManager.RdpConnections
         //Liste aller Spalten
         private static readonly List<SqliteColumnDefinition> m_dbcolumns = new List<SqliteColumnDefinition>
         {
-            new SqliteColumnDefinition("Id", "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT"),
-            new SqliteColumnDefinition("ParentId", "INTEGER"),
-            new SqliteColumnDefinition("Name", "TEXT"),
-            new SqliteColumnDefinition("Type", "INTEGER"),
-            new SqliteColumnDefinition("Hostname", "TEXT"),
-            new SqliteColumnDefinition("Username", "TEXT"),
-            new SqliteColumnDefinition("Password", "TEXT"),
-            new SqliteColumnDefinition("PingHost", "INTEGER"),
-            new SqliteColumnDefinition("Bemerkung", "TEXT")
+            new SqliteColumnDefinition("Id", "INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT", null),
+            new SqliteColumnDefinition("ParentId", "INTEGER", -1),
+            new SqliteColumnDefinition("Name", "TEXT", ""),
+            new SqliteColumnDefinition("Type", "INTEGER", 1),
+            new SqliteColumnDefinition("Hostname", "TEXT", ""),
+            new SqliteColumnDefinition("Username", "TEXT", ""),
+            new SqliteColumnDefinition("Password", "TEXT", ""),
+            new SqliteColumnDefinition("PingHost", "INTEGER", 0),
+            new SqliteColumnDefinition("Bemerkung", "TEXT", "")
         };
 
         /// <summary>
@@ -124,6 +124,12 @@ namespace RemoteDesktopManager.RdpConnections
                 for (byte i = 0; i < m_dbcolumns.Count; i++)
                 {
                     sql += m_dbcolumns[i].ColumnName + " " + m_dbcolumns[i].ColumnType;
+
+                    //Datentyp beachten
+                    if (m_dbcolumns[i].ColumnType.Contains("TEXT") && m_dbcolumns[i].DefaultValue.ToString() != "")
+                        sql += " DEFAULT '" + m_dbcolumns[i].DefaultValue.ToString() + "'";
+                    else if (m_dbcolumns[i].DefaultValue != null)
+                        sql += " DEFAULT " + m_dbcolumns[i].DefaultValue.ToString();
                     if (i != (m_dbcolumns.Count - 1)) sql += ", ";
                 }
                 sql += ");";
@@ -144,7 +150,17 @@ namespace RemoteDesktopManager.RdpConnections
             {
                 try
                 {
-                    ExecuteSql("alter table tblConnectionStructure add column " + s.ColumnName + " " + s.ColumnType + ";");
+                    //SQL-Befehl bilden
+                    string sql = "alter table tblConnectionStructure add column " + s.ColumnName + " " + s.ColumnType;
+                    //Datentyp beachten
+                    if (s.ColumnType.Contains("TEXT") && s.DefaultValue.ToString() != "")
+                        sql += " DEFAULT '" + s.DefaultValue.ToString() + "'";
+                    else if (s.DefaultValue != null)
+                        sql += " DEFAULT " + s.DefaultValue.ToString();
+                    sql += ";";
+
+                    //Befehl ausführen
+                    ExecuteSql(sql);
                 }
                 catch { }
             }
