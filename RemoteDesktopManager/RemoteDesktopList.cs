@@ -71,53 +71,51 @@ namespace RemoteDesktopManager
         private void RefreshList()
         {
             //Die Liste darf nicht null sein
-            if (m_entries != null)
+            if (m_entries != null && m_entries.Count > 0)
             {
                 //Liste aktualisieren
                 panellist.Controls.Clear();
-                if (m_entries.Count > 0) //Nur durchführen, wenn Einträgee existieren
+
+                //Alle Einträge einzeln durchgehen. Das ganze wird in 2 Foreach-Schleifen abgearbeitet, da die Ordner ganz oben sein sollen
+                //Ordner
+                foreach (RdpFolderStructureEntry rdp in m_entries)
                 {
-                    //Alle Einträge einzeln durchgehen. Das ganze wird in 2 Foreach-Schleifen abgearbeitet, da die Ordner ganz oben sein sollen
-                    //Ordner
-                    foreach (RdpFolderStructureEntry rdp in m_entries)
+                    //Der Typ muss 1 sein und die ParentId die aktuelle Id des Controls
+                    if (rdp.Type == 1 && rdp.ParentId == m_actualid)
                     {
-                        //Der Typ muss 1 sein und die ParentId die aktuelle Id des Controls
-                        if (rdp.Type == 1 && rdp.ParentId == m_actualid)
-                        {
-                            //Control erstellen und einbinden
-                            RemoteDesktopListFolderItem l = new RemoteDesktopListFolderItem(rdp);
-                            
-                            //Events anbinden
-                            l.DoubleClick += RemoteDesktopFolderItem_Clicked;
-                            l.EntryRemove += RemoveEntry;
-                            l.EntryChanged += EntryChanged;
+                        //Control erstellen und einbinden
+                        RemoteDesktopListFolderItem l = new RemoteDesktopListFolderItem(rdp);
 
-                            l.Dock = DockStyle.Top;
-                            l.Show();
-                            panellist.Controls.Add(l);
-                            panellist.Controls.SetChildIndex(l, 0);
-                        }
+                        //Events anbinden
+                        l.DoubleClick += RemoteDesktopFolderItem_Clicked;
+                        l.EntryRemove += RemoveEntry;
+                        l.EntryChanged += EntryChanged;
+
+                        l.Dock = DockStyle.Top;
+                        l.Show();
+                        panellist.Controls.Add(l);
+                        panellist.Controls.SetChildIndex(l, 0);
                     }
+                }
 
-                    //Vebrindungen
-                    foreach (RdpFolderStructureEntry rdp in m_entries)
+                //Vebrindungen
+                foreach (RdpFolderStructureEntry rdp in m_entries)
+                {
+                    //Der Typ muss 1 sein und die ParentId die aktuelle Id des Controls
+                    if (rdp.Type == 0 && rdp.ParentId == m_actualid)
                     {
-                        //Der Typ muss 1 sein und die ParentId die aktuelle Id des Controls
-                        if (rdp.Type == 0 && rdp.ParentId == m_actualid)
-                        {
-                            //Control erstellen und einbinden
-                            RemoteDesktopListItem l = new RemoteDesktopListItem((RdpFolderStructureRdpEntry)rdp);
+                        //Control erstellen und einbinden
+                        RemoteDesktopListItem l = new RemoteDesktopListItem((RdpFolderStructureRdpEntry)rdp);
 
-                            //Events anbinden
-                            l.DoubleClick += RemoteDesktopItem_Clicked; 
-                            l.EntryRemove += RemoveEntry;
-                            l.EntryChanged += EntryChanged;
+                        //Events anbinden
+                        l.DoubleClick += RemoteDesktopItem_Clicked;
+                        l.EntryRemove += RemoveEntry;
+                        l.EntryChanged += EntryChanged;
 
-                            l.Dock = DockStyle.Top;
-                            l.Show();
-                            panellist.Controls.Add(l);
-                            panellist.Controls.SetChildIndex(l, 0);
-                        }
+                        l.Dock = DockStyle.Top;
+                        l.Show();
+                        panellist.Controls.Add(l);
+                        panellist.Controls.SetChildIndex(l, 0);
                     }
                 }
             }
@@ -130,8 +128,9 @@ namespace RemoteDesktopManager
         private void RemoteDesktopFolderItem_Clicked(object sender, EventArgs e)
         {
             //Wenn auf einen Ordner ein Doppelklick gemacht wird, dann soll m_actualid die ID des Ordners bekommen und dann die Liste neu geladen werden
+            m_parentid = m_actualid; //Parent überschreiben
             m_actualid = ((RemoteDesktopListFolderItem)sender).FolderId;
-            if (m_actualid != -1) btnnavigateup.Enabled = true; //Wenn die neue Ebene NICHT -1 ist, den Navigationsbutton aktivieren
+            btnnavigateup.Enabled = true; //Kann auf Tru gesetzt werden
             RefreshList();
         }
 
@@ -258,17 +257,13 @@ namespace RemoteDesktopManager
         /// </summary>
         private void btnnavigateup_Click(object sender, EventArgs e)
         {
-            //ID überschreiben
+            //Aktuelle Id mit der des parents überschreiben
             m_actualid = m_parentid;
-
-            //Wenn die neue Ebene -1 ist, den Navigationsbutton deaktivieren
-            if (m_actualid == -1) btnnavigateup.Enabled = false; 
 
             //Wenn die neue Ebene nicht -1 ist, dann soll die Parent-ID ermittelt werden
             if (m_actualid != -1)
             {
-                //Daten werden geladen
-                m_entries = SqliteDataIO.GetEntries(m_conmanager);
+                //Die Einträge durchgehen und den Parent ermitteln
                 foreach (RdpFolderStructureEntry rdp in m_entries)
                 {
                     //Der Typ muss 1 sein und die Id die aktuelle Id des Controls
@@ -280,6 +275,10 @@ namespace RemoteDesktopManager
                     }
                 }
             }
+            else m_parentid = -1;
+
+            //Button freischalten
+            btnnavigateup.Enabled = (m_actualid == -1) ? false : true;
 
             //Daten laden
             RefreshList();
